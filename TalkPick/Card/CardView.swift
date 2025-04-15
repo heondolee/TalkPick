@@ -18,7 +18,7 @@ struct CardView: View {
     }
 
     var body: some View {
-        VStack(alignment: .center, spacing: 48) {
+        VStack(alignment: .center, spacing: 36) {
             Text(topicTitle)
                 .font(.largeTitle)
                 .bold()
@@ -106,7 +106,7 @@ struct CardView: View {
                           .multilineTextAlignment(.center)
                           .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
                           .frame(width: 104, height: 48, alignment: .center)
-                        Text("좋아요\n109K")
+                        Text("좋아요\n\(filteredCards[currentIndex].likes)K")
                           .font(
                             Font.custom("SF Pro", size: 15)
                               .weight(.medium)
@@ -145,9 +145,9 @@ struct CardView: View {
             }
         }
         .padding(.horizontal, 16)
-        .padding(.top, 36)
         .padding(.bottom, 0)
         .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .top)
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 
