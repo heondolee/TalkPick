@@ -93,6 +93,7 @@ struct CardView: View {
                         .tag(index)
                     }
                 }
+                .frame(height: 500) // 카드 높이보다 살짝 크게 지정
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 
                 HStack(alignment: .center, spacing: 64) {
