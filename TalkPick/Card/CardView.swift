@@ -24,70 +24,76 @@ struct CardView: View {
                 .bold()
                 .padding(.top, 20)
 
-            if currentIndex < filteredCards.count {
-                let card = filteredCards[currentIndex]
-                VStack(alignment: .center, spacing: 0) {
-                    Text("🎬")
-                      .font(
-                        Font.custom("SF Pro", size: 48)
-                          .weight(.bold)
-                      )
-                      .foregroundColor(.black)
-                    
-                    HStack(alignment: .center, spacing: 8) {
-                        Text(card.question)
-                          .font(
-                            Font.custom("SF Pro", size: 22)
-                              .weight(.bold)
+            if !filteredCards.isEmpty {
+                TabView(selection: $currentIndex) {
+                    ForEach(0..<filteredCards.count, id: \.self) { index in
+                        let card = filteredCards[index]
+                        VStack(alignment: .center, spacing: 0) {
+                            Text("🎬")
+                              .font(
+                                Font.custom("SF Pro", size: 48)
+                                  .weight(.bold)
+                              )
+                              .foregroundColor(.black)
+                            
+                            HStack(alignment: .center, spacing: 8) {
+                                Text(card.question)
+                                  .font(
+                                    Font.custom("SF Pro", size: 22)
+                                      .weight(.bold)
+                                  )
+                                  .kerning(0.38)
+                                  .foregroundColor(Color(red: 0.16, green: 0.16, blue: 0.16))
+                                  .frame(maxWidth: .infinity, alignment: .topLeading)
+                            }
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 15)
+                            .frame(maxWidth: .infinity, minHeight: 281, maxHeight: 281, alignment: .leading)
+                            .background(.white.opacity(0.77))
+                            .cornerRadius(10)
+                            
+                            HStack(alignment: .center, spacing: 4) {
+                                Rectangle()
+                                  .foregroundColor(.clear)
+                                  .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                  .background(
+                                    Image("PATH_TO_IMAGE")
+                                      .resizable()
+                                      .aspectRatio(contentMode: .fill)
+                                      .frame(width: 18, height: 18)
+                                      .clipped()
+                                  )
+                                // Footnote/Emphasized
+                                Text("@\(card.author)")
+                                  .font(
+                                    Font.custom("SF Pro", size: 13)
+                                      .weight(.semibold)
+                                  )
+                            }
+                            .padding(.leading, 5)
+                            .padding(.trailing, 10)
+                            .padding(.vertical, 4)
+                            .background(Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0.33))
+                            .cornerRadius(16)
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 64)
+                        .frame(width: 324, height: 483, alignment: .bottom)
+                        .background(
+                          LinearGradient(
+                            stops: [
+                              Gradient.Stop(color: Color(red: 0.56, green: 0.67, blue: 0.16), location: 0.00),
+                              Gradient.Stop(color: Color(red: 0.97, green: 1, blue: 0.33), location: 1.00),
+                            ],
+                            startPoint: UnitPoint(x: 0.82, y: 1.25),
+                            endPoint: UnitPoint(x: 0.82, y: -0.25)
                           )
-                          .kerning(0.38)
-                          .foregroundColor(Color(red: 0.16, green: 0.16, blue: 0.16))
-                          .frame(maxWidth: .infinity, alignment: .topLeading)
+                        )
+                        .cornerRadius(24)
+                        .tag(index)
                     }
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 15)
-                    .frame(maxWidth: .infinity, minHeight: 281, maxHeight: 281, alignment: .leading)
-                    .background(.white.opacity(0.77))
-                    .cornerRadius(10)
-                    
-                    HStack(alignment: .center, spacing: 4) {
-                        Rectangle()
-                          .foregroundColor(.clear)
-                          .frame(maxWidth: .infinity, maxHeight: .infinity)
-                          .background(
-                            Image("PATH_TO_IMAGE")
-                              .resizable()
-                              .aspectRatio(contentMode: .fill)
-                              .frame(width: 18, height: 18)
-                              .clipped()
-                          )
-                        // Footnote/Emphasized
-                        Text("@\(card.author)")
-                          .font(
-                            Font.custom("SF Pro", size: 13)
-                              .weight(.semibold)
-                          )
-                    }
-                    .padding(.leading, 5)
-                    .padding(.trailing, 10)
-                    .padding(.vertical, 4)
-                    .background(Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0.33))
-                    .cornerRadius(16)
                 }
-                .padding(.horizontal, 24)
-                .padding(.vertical, 64)
-                .frame(width: 324, height: 483, alignment: .bottom)
-                .background(
-                  LinearGradient(
-                    stops: [
-                      Gradient.Stop(color: Color(red: 0.56, green: 0.67, blue: 0.16), location: 0.00),
-                      Gradient.Stop(color: Color(red: 0.97, green: 1, blue: 0.33), location: 1.00),
-                    ],
-                    startPoint: UnitPoint(x: 0.82, y: 1.25),
-                    endPoint: UnitPoint(x: 0.82, y: -0.25)
-                  )
-                )
-                .cornerRadius(24)
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 
                 HStack(alignment: .center, spacing: 64) {
                     VStack(alignment: .center, spacing: 10) {
