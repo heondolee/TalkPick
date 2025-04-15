@@ -22,8 +22,6 @@ struct CardView: View {
             Text(topicTitle)
                 .font(.largeTitle)
                 .bold()
-                .padding(.top, 20)
-
             if !filteredCards.isEmpty {
                 TabView(selection: $currentIndex) {
                     ForEach(0..<filteredCards.count, id: \.self) { index in
@@ -35,6 +33,7 @@ struct CardView: View {
                                   .weight(.bold)
                               )
                               .foregroundColor(.black)
+                              .padding(.top, 24)
                             
                             HStack(alignment: .center, spacing: 8) {
                                 Text(card.question)
@@ -52,27 +51,34 @@ struct CardView: View {
                             .background(.white.opacity(0.77))
                             .cornerRadius(10)
                             
-                            HStack(alignment: .center, spacing: 4) {
+                            HStack(alignment: .center, spacing: 8) {
                                 Rectangle()
                                   .foregroundColor(.clear)
                                   .frame(maxWidth: .infinity, maxHeight: .infinity)
                                   .background(
-                                    Image("PATH_TO_IMAGE")
+                                    Image(systemName: "hand.thumbsup")
                                       .resizable()
                                       .aspectRatio(contentMode: .fill)
                                       .frame(width: 18, height: 18)
                                       .clipped()
                                   )
-                                // Footnote/Emphasized
-                                Text("@\(card.author)")
-                                  .font(
-                                    Font.custom("SF Pro", size: 13)
-                                      .weight(.semibold)
-                                  )
+                                HStack(alignment: .center) {
+                                    
+                                    Spacer()
+                                    
+                                    Text("@\(card.author)")
+                                      .font(
+                                        Font.custom("SF Pro", size: 13)
+                                          .weight(.semibold)
+                                      )
+                                }
+
                             }
                             .padding(.leading, 5)
                             .padding(.trailing, 10)
-                            .padding(.vertical, 4)
+                            .padding(.vertical, 6)
+                            .padding(.leading, 5)
+                            .fixedSize()
                             .background(Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0.33))
                             .cornerRadius(16)
                         }
