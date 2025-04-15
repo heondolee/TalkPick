@@ -50,7 +50,7 @@ struct IconCardView: View {
 }
 
 let columns = [
-    GridItem(.flexible()),
+    GridItem(.flexible(), spacing: 16),
     GridItem(.flexible())
 ]
 
