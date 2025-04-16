@@ -52,36 +52,37 @@ struct CardView: View {
                             .background(.white.opacity(0.77))
                             .cornerRadius(10)
                             
-                            HStack(alignment: .center, spacing: 8) {
-                                Rectangle()
-                                  .foregroundColor(.clear)
-                                  .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                  .background(
-                                    Image(systemName: "hand.thumbsup")
-                                      .resizable()
-                                      .aspectRatio(contentMode: .fill)
-                                      .frame(width: 18, height: 18)
-                                      .clipped()
-                                  )
-                                HStack(alignment: .center) {
-                                    
-                                    Spacer()
-                                    
+                            
+                            
+                            HStack() {
+                                Spacer()
+                                
+                                HStack(alignment: .center, spacing: 8) {
+                                    Rectangle()
+                                      .foregroundColor(.clear)
+                                      .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                      .background(
+                                        Image(systemName: "hand.thumbsup")
+                                          .resizable()
+                                          .aspectRatio(contentMode: .fill)
+                                          .frame(width: 18, height: 18)
+                                          .clipped()
+                                      )
                                     Text("@\(card.author)")
                                       .font(
                                         Font.custom("SF Pro", size: 13)
                                           .weight(.semibold)
                                       )
-                                }
 
+                                }
+                                .padding(.leading, 5)
+                                .padding(.trailing, 10)
+                                .padding(.vertical, 6)
+                                .padding(.leading, 5)
+                                .fixedSize()
+                                .background(Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0.33))
+                                .cornerRadius(16)
                             }
-                            .padding(.leading, 5)
-                            .padding(.trailing, 10)
-                            .padding(.vertical, 6)
-                            .padding(.leading, 5)
-                            .fixedSize()
-                            .background(Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0.33))
-                            .cornerRadius(16)
                         }
                         .padding(.horizontal, 24)
                         .padding(.bottom, 10)
@@ -107,20 +108,20 @@ struct CardView: View {
                     VStack(alignment: .center, spacing: 10) {
                         Image(systemName: "hand.thumbsup")
                           .font(
-                            Font.custom("SF Pro", size: 30)
+                            Font.custom("SF Pro", size: 40)
                               .weight(.medium)
                           )
                           .multilineTextAlignment(.center)
                           .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
                           .frame(width: 104, height: 48, alignment: .center)
-                        Text("좋아요\n\(filteredCards[currentIndex].likes)K")
-                          .font(
-                            Font.custom("SF Pro", size: 15)
-                              .weight(.medium)
-                          )
+                        Text("좋아요 \n \(filteredCards[currentIndex].likes)K")
+                            .font(
+                                .callout
+                              .weight(.bold)
+                            )
                           .multilineTextAlignment(.center)
                           .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
-                          .frame(width: 104, height: 48, alignment: .top)
+                          .frame(width: 104, height: 100, alignment: .top)
                     }
                     .padding(0)
                     .frame(width: 104, height: 112, alignment: .top)
@@ -128,18 +129,20 @@ struct CardView: View {
                     VStack(alignment: .center, spacing: 10) {
                         Image(systemName: "hand.thumbsdown")
                           .font(
-                            Font.custom("SF Pro", size: 30)
+                            Font.custom("SF Pro", size: 40)
                               .weight(.medium)
                           )
+                          .foregroundStyle(.secondary)
                           .multilineTextAlignment(.center)
                           .frame(width: 104, height: 48, alignment: .center)
                         
                         Text("별로예요\n1K")
-                          .font(
-                            Font.custom("SF Pro", size: 15)
-                              .weight(.medium)
-                          )
+                            .font(
+                                .callout
+                              .weight(.bold)
+                            )
                           .multilineTextAlignment(.center)
+                          .foregroundStyle(.secondary)
                           .frame(width: 104, height: 48, alignment: .top)
                     }
                     .padding(0)
