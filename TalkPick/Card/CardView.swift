@@ -26,7 +26,8 @@ struct CardView: View {
                 TabView(selection: $currentIndex) {
                     ForEach(0..<filteredCards.count, id: \.self) { index in
                         let card = filteredCards[index]
-                        VStack(alignment: .center, spacing: 0) {
+                        VStack(alignment: .center, spacing: 32) {
+                            Spacer()
                             Text("🎬")
                               .font(
                                 Font.custom("SF Pro", size: 48)
@@ -38,8 +39,8 @@ struct CardView: View {
                             HStack(alignment: .center, spacing: 8) {
                                 Text(card.question)
                                   .font(
-                                    Font.custom("SF Pro", size: 22)
-                                      .weight(.bold)
+                                    .title2
+                                    .weight(.bold)
                                   )
                                   .kerning(0.38)
                                   .foregroundColor(Color(red: 0.16, green: 0.16, blue: 0.16))
@@ -83,7 +84,7 @@ struct CardView: View {
                             .cornerRadius(16)
                         }
                         .padding(.horizontal, 24)
-                        .padding(.vertical, 64)
+                        .padding(.bottom, 10)
                         .frame(width: 324, height: 483, alignment: .bottom)
                         .background(
                           LinearGradient(
