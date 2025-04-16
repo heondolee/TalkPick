@@ -14,6 +14,8 @@ struct DetailedCard: Identifiable, Hashable {
     let question: String
     let title: String
     let likes: Int
+    let dislikes: Int
+    let image: String?
     let updatedAt: Date
 }
 
@@ -23,8 +25,8 @@ class CardViewModel: ObservableObject {
     init() {
         allCards = detailedCards
     }
-    func addCard(author: String, question: String, title: String, likes: Int) {
-        let newCard = DetailedCard(author: author, question: question, title: title, likes: likes, updatedAt: Date())
+    func addCard(author: String, question: String, title: String, likes: Int, dislikes: Int, image: String?) {
+        let newCard = DetailedCard(author: author, question: question, title: title, likes: likes, dislikes: dislikes, image: image, updatedAt: Date())
         allCards.append(newCard)
     }
     func removeCard(at index: Int) {
