@@ -82,6 +82,8 @@ struct CardView: View {
                                 .background(Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0.33))
                                 .cornerRadius(16)
                             }
+                            .offset(x: 14) // 오른쪽으로 14만큼 이동 → 부모 패딩을 벗어남
+
                         }
                         .padding(.horizontal, 24)
                         .padding(.bottom, 10)
