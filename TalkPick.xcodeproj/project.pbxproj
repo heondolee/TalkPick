@@ -24,9 +24,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C6EB97C82DAE8D6A0048AD88 /* TalkPick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = TalkPick.app; path = "/Users/rundo/Desktop/Dev/TalkPick/build/Debug-iphoneos/TalkPick.app"; sourceTree = "<absolute>"; };
-		C6EB97C92DAE8D6A0048AD88 /* TalkPickTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TalkPickTests.xctest; path = "/Users/rundo/Desktop/Dev/TalkPick/build/Debug-iphoneos/TalkPick.app/PlugIns/TalkPickTests.xctest"; sourceTree = "<absolute>"; };
-		C6EB97CA2DAE8D6A0048AD88 /* TalkPickUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TalkPickUITests.xctest; path = "/Users/rundo/Desktop/Dev/TalkPick/build/Debug-iphoneos/TalkPickUITests-Runner.app/PlugIns/TalkPickUITests.xctest"; sourceTree = "<absolute>"; };
+		C6836ECB2DAFCEAB0040680A /* TalkPick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkPick.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6836ECC2DAFCEAB0040680A /* TalkPickTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalkPickTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6836ECD2DAFCEAB0040680A /* TalkPickUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalkPickUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -66,6 +66,9 @@
 			isa = PBXGroup;
 			children = (
 				C6A680792DABDC85000D31E0 /* TalkPick */,
+				C6836ECB2DAFCEAB0040680A /* TalkPick.app */,
+				C6836ECC2DAFCEAB0040680A /* TalkPickTests.xctest */,
+				C6836ECD2DAFCEAB0040680A /* TalkPickUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,7 +94,7 @@
 			packageProductDependencies = (
 			);
 			productName = TalkPick;
-			productReference = C6EB97C82DAE8D6A0048AD88 /* TalkPick.app */;
+			productReference = C6836ECB2DAFCEAB0040680A /* TalkPick.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C6A680862DABDC86000D31E0 /* TalkPickTests */ = {
@@ -111,7 +114,7 @@
 			packageProductDependencies = (
 			);
 			productName = TalkPickTests;
-			productReference = C6EB97C92DAE8D6A0048AD88 /* TalkPickTests.xctest */;
+			productReference = C6836ECC2DAFCEAB0040680A /* TalkPickTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		C6A680902DABDC86000D31E0 /* TalkPickUITests */ = {
@@ -131,7 +134,7 @@
 			packageProductDependencies = (
 			);
 			productName = TalkPickUITests;
-			productReference = C6EB97CA2DAE8D6A0048AD88 /* TalkPickUITests.xctest */;
+			productReference = C6836ECD2DAFCEAB0040680A /* TalkPickUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */

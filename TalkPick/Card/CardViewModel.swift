@@ -5,46 +5,56 @@
 //  Created by rundo on 4/15/25.
 //
 
+import SwiftData
 import Foundation
-import SwiftUI
 
-struct DetailedCard: Identifiable {
-    let id = UUID()
-    let author: String
-    let question: String
-    let title: String
-    let likes: Int
-    let dislikes: Int
-    let image: String?
-    let updatedAt: Date
+@Model
+class User {
+    @Attribute(.unique) var id: UUID // @Attribute(.unique)는 SwiftData가 id를 중복 없이 관리하도록 함.
+    var name: String
+    var imageData: Data?
+    
+    @Relationship(deleteRule: .cascade) // @Relationship을 통해 User가 소유한 DetailedCard 목록을 정의, deleteRule: .cascade: 유저 삭제 시 카드도 같이 삭제됨.
+    var cards: [DetailedCard]?
+
+
+    init(id: UUID = UUID(), name: String, email: String) {
+        self.id = id
+        self.name = name
+        self.imageData = nil
+    }
 }
 
-class CardViewModel: ObservableObject { // 외부에서 주입된 뷰모델을 관찰
-    @Published var allCards: [DetailedCard] = []
-    
-    init() {
-        allCards = detailedCards
-    }
-    func addCard(author: String, question: String, title: String, likes: Int, dislikes: Int, image: String?) {
-        let newCard = DetailedCard(author: author, question: question, title: title, likes: likes, dislikes: dislikes, image: image, updatedAt: Date())
-        allCards.append(newCard)
-    }
-    func removeCard(at index: Int) {
-        guard index >= 0 && index < allCards.count else { return }
-        allCards.remove(at: index)
-    }
-    func updateCard(at index: Int, with newCard: DetailedCard) {
-        guard index >= 0 && index < allCards.count else { return }
-        allCards[index] = newCard
-    }
-    func getCard(at index: Int) -> DetailedCard? {
-        guard index >= 0 && index < allCards.count else { return nil }
-        return allCards[index]
-    }
-    func getCardsByTitle(_ title: String) -> [DetailedCard] {
-        return allCards.filter { $0.title == title }
-    }
-    func getCardsByAuthor(_ author: String) -> [DetailedCard] {
-        return allCards.filter { $0.author == author }
+@Model // @Model은 SwiftData에서 해당 클래스가 데이터베이스 모델임을 지정해주는 매크로
+class DetailedCard {
+    var id: UUID
+    var question: String
+    var title: String
+    var likes: Int
+    var dislikes: Int
+    var image: String?
+    var updatedAt: Date
+
+    @Relationship(inverse: \User.cards) // 이 관계의 반대편은 User 모델 안의 cards 프로퍼티라는 뜻
+    var author: User?
+
+    init(
+        id: UUID = UUID(),
+        author: User?,
+        question: String,
+        title: String,
+        likes: Int = 0,
+        dislikes: Int = 0,
+        image: String? = nil,
+        updatedAt: Date = .now
+    ) {
+        self.id = id
+        self.author = author
+        self.question = question
+        self.title = title
+        self.likes = likes
+        self.dislikes = dislikes
+        self.image = image
+        self.updatedAt = updatedAt
     }
 }
