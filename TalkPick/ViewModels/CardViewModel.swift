@@ -19,7 +19,7 @@ class CardViewModel: ObservableObject {
     
     func loadCards() {
         do {
-            let descriptor = FetchDescriptor<Card>()
+            let descriptor = FetchDescriptor<Card>() // Card타입의 데이터를 모두 가져오겠다.
             cards = try context.fetch(descriptor)
             
             // 데이터 없으면 mock 삽입
@@ -30,6 +30,10 @@ class CardViewModel: ObservableObject {
         } catch {
             print("Error loading cards: \(error)")
         }
+    }
+
+    func getCardsByTitle(_ title: String) -> [Card] {
+        return cards.filter { $0.title == title }
     }
     
     private func insertMockData() {
@@ -49,6 +53,6 @@ class CardViewModel: ObservableObject {
             context.insert(newCard)
         }
 
-        try? context.save()
+        try? context.save() // try? context.save()는 저장을 시도하고, 실패하더라도 앱이 멈추지 않게 합니다.
     }
 }

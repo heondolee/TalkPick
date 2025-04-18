@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct CardView: View {
-    
     let topicTitle: String
-    @State private var currentIndex = 0
-    @StateObject var viewModel = CardViewModel()
+    @Environment(\.modelContext) private var context
+    @State private var viewModel: CardViewModel?
 
-    var filteredCards: [DetailedCard] {
-        viewModel.getCardsByTitle(topicTitle)
+    init(topicTitle: String) {
+        self.topicTitle = topicTitle
+    }
+
+    @State private var currentIndex = 0
+
+    var filteredCards: [Card] {
+        viewModel?.getCardsByTitle(topicTitle) ?? []
     }
 
     var body: some View {
@@ -67,7 +72,7 @@ struct CardView: View {
                                           .frame(width: 18, height: 18)
                                           .clipped()
                                       )
-                                    Text("@\(card.author)")
+                                    Text("@\(card.author?.name ?? "알 수 없음")")
                                       .font(
                                         Font.custom("SF Pro", size: 13)
                                           .weight(.semibold)
@@ -159,6 +164,11 @@ struct CardView: View {
         .padding(.bottom, 0)
         .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .top)
         .toolbar(.hidden, for: .tabBar)
+        .onAppear {
+            if viewModel == nil {
+                viewModel = CardViewModel(context: context)
+            }
+        }
     }
 }
 

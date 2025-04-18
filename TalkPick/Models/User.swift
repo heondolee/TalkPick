@@ -1,4 +1,3 @@
-//
 //  User.swift
 //  TalkPick
 //
@@ -19,7 +18,7 @@ class User {
 
 
     init(id: UUID = UUID(), name: String, imageData: Data?) {
-        self.id = id
+        self.id = id // id만 UUID()를 통해 기본적으로 생성된다.
         self.name = name
         self.imageData = imageData
     }
