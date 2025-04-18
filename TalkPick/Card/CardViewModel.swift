@@ -19,7 +19,7 @@ struct DetailedCard: Identifiable, Hashable {
     let updatedAt: Date
 }
 
-class CardViewModel: ObservableObject {
+class CardViewModel: ObservableObject { // 외부에서 주입된 뷰모델을 관찰
     @Published var allCards: [DetailedCard] = []
     
     init() {
