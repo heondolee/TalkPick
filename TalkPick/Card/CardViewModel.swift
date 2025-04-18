@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct DetailedCard: Identifiable, Hashable {
+struct DetailedCard: Identifiable {
     let id = UUID()
     let author: String
     let question: String
