@@ -13,6 +13,9 @@ class CardViewModel: ObservableObject { // 프로토콜: 클래스가 뷰에 상
 
     private let context: ModelContext
     
+    @State private var inputQuestion: String = ""
+    @State private var inputImageName: String = ""
+
     init(context: ModelContext) {
         self.context = context
         loadCards()

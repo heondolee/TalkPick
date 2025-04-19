@@ -6,18 +6,24 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct EditCardModal: View {
     
     @Environment(\.dismiss) private var dismiss  // 모달 닫기용
+    @Environment(\.modelContext) private var context
     
     let userId: UUID // 유저 아이디를 받는다
-    
-    @Environment(\.modelContext) private var context
-    @State private var viewModel: CardViewModel?
+    @State private var user: User?
+
+    @State private var cardVM: CardViewModel?
     
     @StateObject private var searchVM = SearchViewModel()
+    
+    
     @State private var selectedTitle: String = "카테고리 선택"
+    @State private var inputQuestion: String = ""
+    @State private var inputImageName: String = ""
     
     var categoryTitles: [String] {
         searchVM.topicSections.flatMap { $0.cards.map { $0.title } }
@@ -50,7 +56,18 @@ struct EditCardModal: View {
 
                 
                 Button {
-                    
+                    let newCard = Card(
+                        author: nil,
+                        question: inputQuestion,
+                        title: selectedTitle,
+                        likes: 0,
+                        dislikes: 0,
+                        image: inputImageName.isEmpty ? nil : inputImageName,
+                        updatedAt: .now
+                    )
+                    context.insert(newCard)
+                    try? context.save()
+                    dismiss()
                 } label: {
                     Text("생성")
                       .font(
@@ -90,11 +107,95 @@ struct EditCardModal: View {
             }
             .padding(.horizontal, 16)
             
+            VStack(alignment: .center, spacing: 32) {
+                Spacer()
+                
+                TextField("이미지 이름 입력", text: $inputImageName)
+                    .textFieldStyle(.roundedBorder)
+                    .padding(.horizontal, 24)
+                
+                if !inputImageName.isEmpty {
+                    Image(inputImageName)
+                        .resizable() // 크기 조절이 가능하게 한다.
+                        .scaledToFit() // 비율을 유지하며 크기를 키운다.
+                        .frame(width: 80, height: 80)
+                        .cornerRadius(16)
+                }
+                
+                HStack(alignment: .center, spacing: 8) {
+                    TextEditor(text: $inputQuestion)
+                        .font(.title2.weight(.bold))
+                        .foregroundColor(Color(red: 0.16, green: 0.16, blue: 0.16))
+                        .frame(maxWidth: .infinity, minHeight: 281, maxHeight: 281, alignment: .leading)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 15)
+                        .background(.white.opacity(0.77))
+                        .cornerRadius(10)
+                }
+                
+                HStack() {
+                    Spacer()
+                    
+                    HStack(alignment: .center, spacing: 8) {
+                        Rectangle()
+                          .foregroundColor(.clear)
+                          .frame(maxWidth: .infinity, maxHeight: .infinity)
+                          .background(
+                            Image(systemName: "hand.thumbsup")
+                              .resizable()
+                              .aspectRatio(contentMode: .fill)
+                              .frame(width: 18, height: 18)
+                              .clipped()
+                          )
+                        Text("@\(user?.name ?? "알 수 없음")")
+                          .font(
+                            Font.custom("SF Pro", size: 13)
+                              .weight(.semibold)
+                          )
+
+                    }
+                    .padding(.leading, 5)
+                    .padding(.trailing, 10)
+                    .padding(.vertical, 6)
+                    .padding(.leading, 5)
+                    .fixedSize()
+                    .background(Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0.33))
+                    .cornerRadius(16)
+                }
+                .offset(x: 14) // 오른쪽으로 14만큼 이동 → 부모 패딩을 벗어남
+
+            }
+            .padding(.horizontal, 24)
+            .padding(.bottom, 10)
+            .frame(width: 324, height: 483, alignment: .bottom)
+            .background(
+              LinearGradient(
+                stops: [
+                  Gradient.Stop(color: Color(red: 0.56, green: 0.67, blue: 0.16), location: 0.00),
+                  Gradient.Stop(color: Color(red: 0.97, green: 1, blue: 0.33), location: 1.00),
+                ],
+                startPoint: UnitPoint(x: 0.82, y: 1.25),
+                endPoint: UnitPoint(x: 0.82, y: -0.25)
+              )
+            )
+            .cornerRadius(24)
+            
             Spacer()
         }
         .padding(.vertical, 16)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.blue.opacity(0.1))
+        .onAppear {
+            let descriptor = FetchDescriptor<User>(
+                predicate: #Predicate { $0.id == userId }
+            )
+            do {
+                let result = try context.fetch(descriptor)
+                user = result.first
+            } catch {
+                print("사용자 조회 실패: \(error)")
+            }
+        }
     }
 }
 

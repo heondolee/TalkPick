@@ -71,7 +71,7 @@ struct MyHomeView: View {
                         }
                         .sheet(isPresented: $showModal) {
                             if let user = viewModel2 {
-                                EditCardModal(userId: user.id)
+                        EditCardModal(userId: user.id)
                             } else {
                                 Text("사용자 정보를 불러올 수 없습니다.")
                             }
@@ -111,7 +111,7 @@ struct MyHomeView: View {
             .task {
                 // User가 없으면 임시 User를 생성
                 let descriptor = FetchDescriptor<User>()
-                if let users = try? context.fetch(descriptor), users.isEmpty {
+                if let users = try? context.fetch(descriptor), users.count == 1 {
                     let tempUser = User(name: "Guest", imageData: nil)
                     context.insert(tempUser)
                     try? context.save()

@@ -31,6 +31,8 @@ struct CardView: View {
                 TabView(selection: $currentIndex) {
                     ForEach(0..<filteredCards.count, id: \.self) { index in
                         let card = filteredCards[index]
+                        
+                        //여기서 부터가 카드 UI
                         VStack(alignment: .center, spacing: 32) {
                             Spacer()
                             if let imageName = card.image {
