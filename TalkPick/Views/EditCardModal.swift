@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct EditCardModal: View {
     
@@ -24,6 +25,10 @@ struct EditCardModal: View {
     @State private var selectedTitle: String = "카테고리 선택"
     @State private var inputQuestion: String = ""
     @State private var inputImageName: String = ""
+    
+    @State private var selectedItem: PhotosPickerItem? = nil
+    @State private var selectedImageData: Data? = nil
+
     
     var categoryTitles: [String] {
         searchVM.topicSections.flatMap { $0.cards.map { $0.title } }
@@ -57,12 +62,12 @@ struct EditCardModal: View {
                 
                 Button {
                     let newCard = Card(
-                        author: nil,
+                        author: user,
                         question: inputQuestion,
                         title: selectedTitle,
                         likes: 0,
                         dislikes: 0,
-                        image: inputImageName.isEmpty ? nil : inputImageName,
+                        image: selectedImageData,
                         updatedAt: .now
                     )
                     context.insert(newCard)
@@ -79,7 +84,6 @@ struct EditCardModal: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 16)
-            .background(Color.red.opacity(0.1))
             
             HStack {
                 
@@ -110,16 +114,20 @@ struct EditCardModal: View {
             VStack(alignment: .center, spacing: 32) {
                 Spacer()
                 
-                TextField("이미지 이름 입력", text: $inputImageName)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(.horizontal, 24)
-                
-                if !inputImageName.isEmpty {
-                    Image(inputImageName)
-                        .resizable() // 크기 조절이 가능하게 한다.
-                        .scaledToFit() // 비율을 유지하며 크기를 키운다.
-                        .frame(width: 80, height: 80)
-                        .cornerRadius(16)
+                PhotosPicker(
+                    selection: $selectedItem,
+                    matching: .images,
+                    photoLibrary: .shared()
+                ) {
+                    Text("사진 선택")
+                }
+                .onChange(of: selectedItem) {
+                    // selectedItem에 직접 접근
+                    Task {
+                        if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
+                            selectedImageData = data
+                        }
+                    }
                 }
                 
                 ZStack(alignment: .topLeading) {
@@ -196,7 +204,6 @@ struct EditCardModal: View {
         }
         .padding(.vertical, 16)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.blue.opacity(0.1))
         .onAppear {
             let descriptor = FetchDescriptor<User>(
                 predicate: #Predicate { $0.id == userId }

@@ -36,11 +36,11 @@ struct CardView: View {
                         VStack(alignment: .center, spacing: 32) {
                             Spacer()
                             if let imageName = card.image {
-                                Image(imageName)
-                                    .resizable() // 크기 조절이 가능하게 한다.
-                                    .scaledToFit() // 비율을 유지하며 크기를 키운다.
-                                    .frame(width: 80, height: 80)
-                                    .cornerRadius(16)
+//                                Image(imageName)
+//                                    .resizable() // 크기 조절이 가능하게 한다.
+//                                    .scaledToFit() // 비율을 유지하며 크기를 키운다.
+//                                    .frame(width: 80, height: 80)
+//                                    .cornerRadius(16)
                             }
                             HStack(alignment: .center, spacing: 8) {
                                 Text(card.question)

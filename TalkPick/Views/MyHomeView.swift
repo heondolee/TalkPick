@@ -112,7 +112,7 @@ struct MyHomeView: View {
                 // User가 없으면 임시 User를 생성
                 let descriptor = FetchDescriptor<User>()
                 if let users = try? context.fetch(descriptor), users.count == 1 {
-                    let tempUser = User(name: "Guest", imageData: nil)
+                    let tempUser = User(name: "Guest", imageData: Data())
                     context.insert(tempUser)
                     try? context.save()
                     viewModel2 = tempUser

@@ -7,6 +7,7 @@
 
 import SwiftData
 import Foundation
+import SwiftUI
 
 @Model // @Model은 SwiftData에서 해당 클래스가 데이터베이스 모델임을 지정해주는 매크로
 class Card {
@@ -15,7 +16,7 @@ class Card {
     var title: String
     var likes: Int
     var dislikes: Int
-    var image: String?
+    var image: Data?  // UIImage를 Data로 변환해서 저장
     var updatedAt: Date
 
     @Relationship(inverse: \User.cards) // 이 관계의 반대편은 User 모델 안의 cards 프로퍼티라는 뜻
@@ -28,7 +29,7 @@ class Card {
         title: String,
         likes: Int = 0,
         dislikes: Int = 0,
-        image: String? = nil,
+        image: Data? = Data(),
         updatedAt: Date = .now
     ) {
         self.id = id
