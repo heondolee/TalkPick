@@ -14,6 +14,8 @@ struct MyHomeView: View {
     @State private var viewModel: CardViewModel?
     @State private var viewModel2: User?
     
+    @State private var showModal = false
+    
     var body: some View {
         NavigationStack {
             VStack(alignment: .center, spacing: 24) { // 전체 세로 프레임
@@ -61,16 +63,23 @@ struct MyHomeView: View {
                         Spacer()
                         
                         Button { // 질문 추가 버튼
-                            //                            addItem() // 버튼 누르면 아이템 추가
+                            showModal = true
                         } label: {
                             Image(systemName: "plus.circle.fill")
                                 .font(.largeTitle)
                                 .foregroundColor(.red)
                         }
+                        .sheet(isPresented: $showModal) {
+                            if let user = viewModel2 {
+                                EditCardModal(userId: user.id)
+                            } else {
+                                Text("사용자 정보를 불러올 수 없습니다.")
+                            }
+                        }
                     }
                     .padding(.horizontal, 16)
                     
-                    
+                    // 리스트 표시하기
                     //                VStack() { // 질문 리스트 전체
                     //                    List {
                     //                        ForEach($itemList) { $item in
