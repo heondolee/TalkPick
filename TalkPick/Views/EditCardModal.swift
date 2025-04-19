@@ -122,14 +122,26 @@ struct EditCardModal: View {
                         .cornerRadius(16)
                 }
                 
-                HStack(alignment: .center, spacing: 8) {
+                ZStack(alignment: .topLeading) {
+                    // 플레이스홀더 텍스트
+                    if inputQuestion.isEmpty {
+                        Text("질문을 입력하세요")
+                            .font(.system(size: 18, weight: .bold))
+
+                            .foregroundColor(.gray)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 24)
+                    }
+
                     TextEditor(text: $inputQuestion)
-                        .font(.title2.weight(.bold))
-                        .foregroundColor(Color(red: 0.16, green: 0.16, blue: 0.16))
+                                    .font(.system(size: 18, weight: .bold))
+
+                        .foregroundColor(.black)
                         .frame(maxWidth: .infinity, minHeight: 281, maxHeight: 281, alignment: .leading)
-                        .padding(.horizontal, 24)
+                        .padding(.horizontal, 16)
                         .padding(.vertical, 15)
                         .background(.white.opacity(0.77))
+                        .scrollContentBackground(.hidden)
                         .cornerRadius(10)
                 }
                 
