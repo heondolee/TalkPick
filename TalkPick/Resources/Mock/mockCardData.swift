@@ -30,9 +30,9 @@ let mockCardData: [CardSample] = [
     CardSample(id: 8, question: "책을 고를 때 가장 중요하게 보는 요소는?", title: "독서", likes: "0", dislikes: "0", image: "📚", updatedAt: Date()),
     CardSample(id: 9, question: "최근 읽은 책 중 추천하고 싶은 책은?", title: "독서", likes: "0", dislikes: "0", image: nil, updatedAt: Date()),
 
-    CardSample(id: 10, question: "요즘 가장 자주 듣는 노래는?", title: "음악", likes: "0", dislikes: "0", image: "🎵", updatedAt: Date()),
-    CardSample(id: 11, question: "인생 노래 한 곡을 꼽자면?", title: "음악", likes: "0", dislikes: "0", image: "🎵", updatedAt: Date()),
-    CardSample(id: 12, question: "음악을 들으면 떠오르는 추억이 있나요?", title: "음악", likes: "0", dislikes: "0", image: nil, updatedAt: Date()),
+    CardSample(id: 10, question: "요즘 가장 자주 듣는 노래는?", title: "음악", likes: "0", dislikes: "0", image: "musicIcon", updatedAt: Date()),
+    CardSample(id: 11, question: "인생 노래 한 곡을 꼽자면?", title: "음악", likes: "0", dislikes: "0", image: "musicIcon", updatedAt: Date()),
+    CardSample(id: 12, question: "음악을 들으면 떠오르는 추억이 있나요?", title: "음악", likes: "0", dislikes: "0", image: "musicIcon", updatedAt: Date()),
 
     CardSample(id: 13, question: "가장 좋아하는 술안주는 무엇인가요?", title: "술자리", likes: "0", dislikes: "0", image: "🍻", updatedAt: Date()),
     CardSample(id: 14, question: "술자리에서 가장 창피했던 순간은?", title: "술자리", likes: "0", dislikes: "0", image: "🍻", updatedAt: Date()),

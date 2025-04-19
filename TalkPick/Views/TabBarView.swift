@@ -32,12 +32,7 @@ struct TabBarView: View {
                     }
             }
             .accentColor(Color(red: 1, green: 0.27, blue: 0.27)) // 활성 탭 색상 설정
-            
-            Divider() // 탭바 바로 위에 가로선 추가
-                .frame(height: 1)
-                .background(Color.gray.opacity(0.5))
         }
-        .edgesIgnoringSafeArea(.bottom) // 탭바와 영역이 겹치지 않도록 설정
     }
 }
 

@@ -8,8 +8,9 @@
 import SwiftUI
 import SwiftData
 
-class CardViewModel: ObservableObject {
-    @Published var cards: [Card] = []
+class CardViewModel: ObservableObject { // 프로토콜: 클래스가 뷰에 상태를 알리도록 함
+    @Published var cards: [Card] = [] // 속성의 변경을 자동 감지. ObservableObject 클래스 내부의 속성이 바뀌었을 때 뷰에 알려주기 위해 사용하는 속성 래퍼
+
     private let context: ModelContext
     
     init(context: ModelContext) {
