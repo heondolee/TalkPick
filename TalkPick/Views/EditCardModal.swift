@@ -21,10 +21,11 @@ struct EditCardModal: View {
     
     @StateObject private var searchVM = SearchViewModel()
     
+    @State private var showAlert: Bool = false
+    @State private var alertMessage: String = ""
     
     @State private var selectedTitle: String = "카테고리 선택"
     @State private var inputQuestion: String = ""
-    @State private var inputImageName: String = ""
     
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
@@ -35,6 +36,7 @@ struct EditCardModal: View {
     }
     
     var body: some View {
+    ScrollView {
         VStack(alignment: .center, spacing: 24) {
             HStack(alignment: .center) {
                 Button {
@@ -61,6 +63,17 @@ struct EditCardModal: View {
 
                 
                 Button {
+                    if selectedTitle == "카테고리 선택" {
+                        alertMessage = "카테고리를 입력하세요!"
+                        showAlert = true
+                        return
+                    }
+                    if inputQuestion == "" {
+                        alertMessage = "질문을 입력하세요!"
+                        showAlert = true
+                        return
+                    }
+
                     let newCard = Card(
                         author: user,
                         question: inputQuestion,
@@ -111,8 +124,26 @@ struct EditCardModal: View {
             }
             .padding(.horizontal, 16)
             
-            VStack(alignment: .center, spacing: 32) {
+            VStack(alignment: .center) {
                 Spacer()
+                
+                if let data = selectedImageData,
+                   let uiImage = UIImage(data: data) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 80, height: 80)
+                        .cornerRadius(16)
+                } else {
+                    Image(systemName: "photo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(12)
+                        .frame(width: 80, height: 80)
+                        .foregroundColor(.gray)
+                        .background(Color.white)
+                        .cornerRadius(16)
+                }
                 
                 PhotosPicker(
                     selection: $selectedItem,
@@ -200,10 +231,15 @@ struct EditCardModal: View {
             )
             .cornerRadius(24)
             
-            Spacer()
+        Spacer()
         }
+    }
         .padding(.vertical, 16)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea(.keyboard) // 키보드를 눌러도 sheet 위의 뷰가 올라가지 않도록
+        .alert(alertMessage, isPresented: $showAlert) {
+            Button("확인", role: .cancel) {}
+        }
         .onAppear {
             let descriptor = FetchDescriptor<User>(
                 predicate: #Predicate { $0.id == userId }

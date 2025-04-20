@@ -13,6 +13,12 @@ struct MyHomeView: View {
     @Environment(\.modelContext) private var context
     @State private var viewModel: CardViewModel?
     @State private var viewModel2: User?
+    @Query private var allCards: [Card]
+    
+    var userCards: [Card] {
+        guard let userId = viewModel2?.id else { return [] }
+        return allCards.filter { $0.author?.id == userId }
+    }
     
     @State private var showModal = false
     
@@ -79,31 +85,42 @@ struct MyHomeView: View {
                     }
                     .padding(.horizontal, 16)
                     
-                    // 리스트 표시하기
-                    //                VStack() { // 질문 리스트 전체
-                    //                    List {
-                    //                        ForEach($itemList) { $item in
-                    //                            NavigationLink {
-                    //                                // 아이템을 수정하는 화면으로 이동
-                    //                                EditItemView(item: $item)
-                    //                            } label: {
-                    //                                HStack {
-                    //                                    Label {
-                    //                                        Text(item.text)
-                    //                                    } icon: {
-                    //                                        Text(item.type.icon)
-                    //                                    }
-                    //
-                    //
-                    //                                    Spacer()
-                    //                                    Text(item.type.displayName)
-                    //                                        .foregroundColor(.gray)
-                    //                                }
-                    //                            }
-                    //                        }
-                    //                        .onDelete(perform: deleteItem) // 스와이프로 삭제 기능 추가
-                    //                    }
-                    //                }
+                    VStack {
+                        List {
+                            ForEach(userCards, id: \.id) { card in
+                                NavigationLink {
+                                    Text("카드 상세 또는 수정 화면") // 필요 시 교체
+                                } label: {
+                                    HStack(alignment: .top, spacing: 12) {
+                                        if let imageData = card.image, let uiImage = UIImage(data: imageData) {
+                                            Image(uiImage: uiImage)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: 40, height: 40)
+                                                .clipShape(Circle())
+                                        } else {
+                                            Circle()
+                                                .fill(Color.gray.opacity(0.3))
+                                                .frame(width: 40, height: 40)
+                                        }
+
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            Text(card.question)
+                                                .font(.headline)
+                                            Text(card.title)
+                                                .font(.subheadline)
+                                                .foregroundColor(.gray)
+                                            if let authorName = card.author?.name {
+                                                Text("@\(authorName)")
+                                                    .font(.caption)
+                                                    .foregroundColor(.secondary)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 Spacer()
             }
@@ -111,7 +128,7 @@ struct MyHomeView: View {
             .task {
                 // User가 없으면 임시 User를 생성
                 let descriptor = FetchDescriptor<User>()
-                if let users = try? context.fetch(descriptor), users.count == 1 {
+                if let users = try? context.fetch(descriptor), users.count >= 0 {
                     let tempUser = User(name: "Guest", imageData: Data())
                     context.insert(tempUser)
                     try? context.save()
