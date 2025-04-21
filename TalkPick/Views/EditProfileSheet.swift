@@ -54,46 +54,58 @@ struct EditProfileSheet: View {
             }
             .padding(.horizontal)
 
-            Spacer()
-
-            if let data = selectedImageData,
-               let uiImage = UIImage(data: data) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 100, height: 100)
-                    .clipShape(Circle())
-            } else {
-                Image(systemName: "person.crop.circle.fill")
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .foregroundColor(.gray)
-            }
-
-            PhotosPicker(
-                selection: $selectedItem,
-                matching: .images
-            ) {
-                Text("사진 수정")
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 8)
-                    .background(Color(.systemGray5))
-                    .cornerRadius(10)
-            }
-            .onChange(of: selectedItem) {
-                Task {
-                    if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
-                        selectedImageData = data
+            VStack {
+                if let data = selectedImageData,
+                   let uiImage = UIImage(data: data) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                } else {
+                    Image(systemName: "person.crop.circle.fill")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .foregroundColor(.gray)
+                }
+                
+                PhotosPicker(
+                    selection: $selectedItem,
+                    matching: .images
+                ) {
+                    Text("사진 수정")
+                        .font(
+                            .headline
+                        )
+                        .foregroundColor(.blue)
+                    
+                }
+                .padding(.top, 8)
+                .onChange(of: selectedItem) {
+                    Task {
+                        if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
+                            selectedImageData = data
+                        }
                     }
                 }
             }
+            .padding(.vertical, 16)
 
             VStack(alignment: .leading, spacing: 8) {
                 Text("이름")
-                    .font(.headline)
+                    .font(
+                    .title2
+                    .bold()
+                        
+                    )
+                    .padding(.top, 12)
                 TextField("이름 입력", text: $editedName)
                     .textFieldStyle(.plain)
-                    .padding(.bottom, 4)
+                    .font(
+                        .title3
+                        .bold()
+                    )
+                    .padding(.top, 12)
                 Divider()
             }
             .padding(.horizontal)
