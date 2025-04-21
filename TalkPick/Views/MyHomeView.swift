@@ -28,11 +28,15 @@ struct MyHomeView: View {
             VStack(alignment: .center, spacing: 24) { // 전체 세로 프레임
                 HStack(alignment: .bottom, spacing: 18) { // 프로필 세로 프레임
                     VStack(alignment: .center, spacing: 10) {
-                        Image("musicIcon")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 86, height: 86)
-                            .clipped()
+                        if let user = viewModel2, // 이런식으로 실제 값이 있는지검사
+                           let data = user.imageData,
+                           let uiImage = UIImage(data: data) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 100, height: 100)
+                                .clipShape(Circle())
+                        }
                         
                     }
                     .padding(0)
@@ -150,9 +154,10 @@ struct MyHomeView: View {
                     try? context.save()
                     viewModel2 = tempUser
                 } else {
-                    viewModel2 = try? context.fetch(descriptor).first
+                    if let users = try? context.fetch(descriptor) {
+                        viewModel2 = users[1]
+                    }
                 }
-
             }
         }
     }
