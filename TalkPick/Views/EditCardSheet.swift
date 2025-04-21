@@ -196,7 +196,6 @@ struct EditCardSheet: View {
                               .resizable()
                               .aspectRatio(contentMode: .fill)
                               .frame(width: 18, height: 18)
-                              .clipped()
                           )
                         Text("@\(user?.name ?? "알 수 없음")")
                           .font(
