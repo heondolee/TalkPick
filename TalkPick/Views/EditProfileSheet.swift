@@ -66,7 +66,7 @@ struct EditProfileSheet: View {
                     Image(systemName: "person.crop.circle.fill")
                         .resizable()
                         .frame(width: 100, height: 100)
-                        .foregroundColor(.gray)
+                        .foregroundColor(Color(.systemGray4))
                 }
                 
                 PhotosPicker(

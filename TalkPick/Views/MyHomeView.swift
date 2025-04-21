@@ -36,6 +36,11 @@ struct MyHomeView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 100, height: 100)
                                 .clipShape(Circle())
+                        } else {
+                            Image(systemName: "person.crop.circle.fill")
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                                .foregroundColor(Color(.systemGray4))
                         }
                         
                     }
@@ -146,7 +151,6 @@ struct MyHomeView: View {
             }
             .navigationTitle("마이홈")
             .task {
-                // User가 없으면 임시 User를 생성
                 let descriptor = FetchDescriptor<User>()
                 if let users = try? context.fetch(descriptor), users.count == 1 {
                     let tempUser = User(name: "Guest", imageData: Data())
@@ -154,8 +158,16 @@ struct MyHomeView: View {
                     try? context.save()
                     viewModel2 = tempUser
                 } else {
-                    if let users = try? context.fetch(descriptor) {
-                        viewModel2 = users[1]
+                    do {
+                        let users = try context.fetch(descriptor)
+                        if users.indices.contains(1) {
+                            viewModel2 = users[1]
+                        } else {
+                            viewModel2 = users.first
+                        }
+                    } catch {
+                        print("유저 fetch 실패: \(error)")
+                        viewModel2 = nil
                     }
                 }
             }
