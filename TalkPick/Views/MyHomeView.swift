@@ -26,7 +26,7 @@ struct MyHomeView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .center, spacing: 24) { // 전체 세로 프레임
-                VStack(alignment: .center, spacing: 18) { // 프로필 세로 프레임
+                HStack(alignment: .bottom, spacing: 18) { // 프로필 세로 프레임
                     VStack(alignment: .center, spacing: 10) {
                         Image("musicIcon")
                             .resizable()
@@ -39,35 +39,40 @@ struct MyHomeView: View {
                     .frame(width: 86, height: 86, alignment: .center)
                     .cornerRadius(10000)
                     
-                    Text("@\(viewModel2?.name ?? "NoGuest")")
-                        .font(
-                        .title2
-                            .weight(.semibold)
-                    )
-                    HStack(alignment: .center, spacing: 2) { // 프로필 편집 버튼
-                        Button {
-                            showModal2 = true
-                        } label: {
-                            Text("프로필 편집")
-                                .font(
-                                    .headline
-                                )
-                                .foregroundColor(.black)
-                        }
-                        .sheet(isPresented: $showModal2) {
-                            if let user = viewModel2 {
-                                EditProfileSheet(userId: user.id)
-                            } else {
-                                Text("사용자 정보를 불러올 수 없습니다.")
+                    Spacer()
+                    
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("@\(viewModel2?.name ?? "NoGuest")")
+                            .font(
+                            .title2
+                                .weight(.semibold)
+                        )
+                        HStack(alignment: .center, spacing: 2) { // 프로필 편집 버튼
+                            Button {
+                                showModal2 = true
+                            } label: {
+                                Text("프로필 편집")
+                                    .font(
+                                        .headline
+                                    )
+                                    .foregroundColor(.black)
+                            }
+                            .sheet(isPresented: $showModal2) {
+                                if let user = viewModel2 {
+                                    EditProfileSheet(userId: user.id)
+                                } else {
+                                    Text("사용자 정보를 불러올 수 없습니다.")
+                                }
                             }
                         }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(60)
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(60)
                 }
-                .padding(.vertical, 16)
+                .padding(.top, 16)
+                .padding(.horizontal, 24)
                 
                 VStack() { // 내가 쓴 질문 + 질문 리스트
                     HStack(alignment: .center, spacing: 0) { // 내가 쓴 질문 가로 프레임 + 버튼
@@ -139,7 +144,7 @@ struct MyHomeView: View {
             .task {
                 // User가 없으면 임시 User를 생성
                 let descriptor = FetchDescriptor<User>()
-                if let users = try? context.fetch(descriptor), users.count >= 0 {
+                if let users = try? context.fetch(descriptor), users.count == 1 {
                     let tempUser = User(name: "Guest", imageData: Data())
                     context.insert(tempUser)
                     try? context.save()
