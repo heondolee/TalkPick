@@ -259,8 +259,12 @@ struct MyHomeView: View {
                                                         .foregroundColor(.secondary)
                                                 }
                                             }
+                                            .padding(.trailing, 12)
                                         }
                                     }
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 40)
+                                    .padding(.vertical, 12)
                                 }
                             }
                         }
