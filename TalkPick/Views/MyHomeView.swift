@@ -125,7 +125,7 @@ struct MyHomeView: View {
                                         .padding(12)
                                         .frame(width: 60, height: 60)
                                         .foregroundColor(.gray)
-                                        .background(Color.black)
+                                        .background(Color(.systemGray6))
                                         .cornerRadius(5)
                                     
                                     VStack(alignment: .leading, spacing: 4) {
@@ -173,7 +173,7 @@ struct MyHomeView: View {
                                         .padding(12)
                                         .frame(width: 60, height: 60)
                                         .foregroundColor(.gray)
-                                        .background(Color.black)
+                                        .background(Color(.systemGray6))
                                         .cornerRadius(5)
                                     
                                     VStack(alignment: .leading, spacing: 4) {
@@ -209,46 +209,62 @@ struct MyHomeView: View {
                                 .frame(height: 40)
                                 .padding(.vertical, 12)
                             }
+                            ForEach(userCards, id: \.id) { card in
+                                NavigationLink {
+                                    Text("카드 상세 또는 수정 화면") // 필요 시 교체
+                                } label: {
+                                    HStack(alignment: .top, spacing: 12) {
+                                        if let imageData = card.image, let uiImage = UIImage(data: imageData) {
+                                            Image(uiImage: uiImage)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .padding(12)
+                                                .frame(width: 60, height: 60)
+                                                .foregroundColor(.gray)
+                                                .background(Color.black)
+                                                .cornerRadius(5)
+                                        } else {
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .padding(12)
+                                                .frame(width: 60, height: 60)
+                                                .foregroundColor(.gray)
+                                                .background(Color(.systemGray6))
+                                                .cornerRadius(5)
+                                        }
+
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            Text(card.question)
+                                                .font(.headline)
+                                            Spacer()
+                                            HStack(alignment: .center){
+                                                Image(systemName: "hand.thumbsup")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fill)
+                                                    .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
+                                                    .frame(width: 18, height: 18)
+                                                
+                                                Text("123")
+                                                    .font(.caption)
+                                                    .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
+                                                
+                                                Spacer()
+                                                Text(card.title)
+                                                    .font(.subheadline)
+                                                    .foregroundColor(.gray)
+                                                if let authorName = card.author?.name {
+                                                    Text("@\(authorName)")
+                                                        .font(.caption)
+                                                        .foregroundColor(.secondary)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                         .listStyle(.inset)
-                        
-                        
-                        
-                        // 여기는 실제 코드
-//                        List {
-//                            ForEach(userCards, id: \.id) { card in
-//                                NavigationLink {
-//                                    Text("카드 상세 또는 수정 화면") // 필요 시 교체
-//                                } label: {
-//                                    HStack(alignment: .top, spacing: 12) {
-//                                        if let imageData = card.image, let uiImage = UIImage(data: imageData) {
-//                                            Image(uiImage: uiImage)
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fill)
-//                                                .frame(width: 40, height: 40)
-//                                                .clipShape(Circle())
-//                                        } else {
-//                                            Circle()
-//                                                .fill(Color.gray.opacity(0.3))
-//                                                .frame(width: 40, height: 40)
-//                                        }
-//
-//                                        VStack(alignment: .leading, spacing: 4) {
-//                                            Text(card.question)
-//                                                .font(.headline)
-//                                            Text(card.title)
-//                                                .font(.subheadline)
-//                                                .foregroundColor(.gray)
-//                                            if let authorName = card.author?.name {
-//                                                Text("@\(authorName)")
-//                                                    .font(.caption)
-//                                                    .foregroundColor(.secondary)
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
                     }
                 }
                 Spacer()
