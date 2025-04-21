@@ -9,14 +9,16 @@ import SwiftUI
 import SwiftData
 import PhotosUI
 
-struct EditCardSheet: View {
+struct CreateCardSheet: View {
     
     @Environment(\.dismiss) private var dismiss  // 모달 닫기용
     @Environment(\.modelContext) private var context
     
-    let cardId: UUID
-    @State private var card: Card?
+    let userId: UUID // 유저 아이디를 받는다
+    @State private var user: User?
 
+    @State private var cardVM: CardViewModel?
+    
     @StateObject private var searchVM = SearchViewModel()
     
     @State private var showAlert: Bool = false
@@ -50,7 +52,7 @@ struct EditCardSheet: View {
                 
                 Spacer()
                 
-                Text("질문 수정")
+                Text("새로운 질문")
                   .font(
                     .headline
                     .bold()
@@ -72,16 +74,20 @@ struct EditCardSheet: View {
                         return
                     }
 
-                    if var card = card {
-                        card.question = inputQuestion
-                        card.title = selectedTitle
-                        card.image = selectedImageData
-                        card.updatedAt = .now
-                        try? context.save()
-                        dismiss()
-                    }
+                    let newCard = Card(
+                        author: user,
+                        question: inputQuestion,
+                        title: selectedTitle,
+                        likes: 0,
+                        dislikes: 0,
+                        image: selectedImageData,
+                        updatedAt: .now
+                    )
+                    context.insert(newCard)
+                    try? context.save()
+                    dismiss()
                 } label: {
-                    Text("수정")
+                    Text("생성")
                       .font(
                         .headline
                         .bold()
@@ -191,7 +197,7 @@ struct EditCardSheet: View {
                               .aspectRatio(contentMode: .fill)
                               .frame(width: 18, height: 18)
                           )
-                        Text("@\(card?.author?.name ?? "알 수 없음")")
+                        Text("@\(user?.name ?? "알 수 없음")")
                           .font(
                             Font.custom("SF Pro", size: 13)
                               .weight(.semibold)
@@ -234,24 +240,19 @@ struct EditCardSheet: View {
             Button("확인", role: .cancel) {}
         }
         .onAppear {
-            let descriptor = FetchDescriptor<Card>(
-                predicate: #Predicate { $0.id == cardId }
+            let descriptor = FetchDescriptor<User>(
+                predicate: #Predicate { $0.id == userId }
             )
             do {
                 let result = try context.fetch(descriptor)
-                card = result.first
-                if let card = card {
-                    inputQuestion = card.question
-                    selectedTitle = card.title
-                    selectedImageData = card.image
-                }
+                user = result.first
             } catch {
-                print("카드 조회 실패: \(error)")
+                print("사용자 조회 실패: \(error)")
             }
         }
     }
 }
 
 #Preview {
-    EditCardSheet(cardId: UUID())
+    CreateCardSheet(userId: UUID())
 }

@@ -102,7 +102,7 @@ struct MyHomeView: View {
                         }
                         .sheet(isPresented: $showModal) {
                             if let user = viewModel2 {
-                                EditCardSheet(userId: user.id)
+                                CreateCardSheet(userId: user.id)
                             } else {
                                 Text("사용자 정보를 불러올 수 없습니다.")
                             }
@@ -211,7 +211,7 @@ struct MyHomeView: View {
                             }
                             ForEach(userCards, id: \.id) { card in
                                 NavigationLink {
-                                    Text("카드 상세 또는 수정 화면") // 필요 시 교체
+                                    EditCardSheet(cardId: card.id)
                                 } label: {
                                     HStack(alignment: .top, spacing: 12) {
                                         if let imageData = card.image, let uiImage = UIImage(data: imageData) {
