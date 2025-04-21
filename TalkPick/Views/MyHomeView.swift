@@ -21,6 +21,7 @@ struct MyHomeView: View {
     }
     
     @State private var showModal = false
+    @State private var showModal2 = false
     
     var body: some View {
         NavigationStack {
@@ -44,12 +45,22 @@ struct MyHomeView: View {
                             .weight(.semibold)
                     )
                     HStack(alignment: .center, spacing: 2) { // 프로필 편집 버튼
-                        // Subheadline/Emphasized
-                        Text("프로필 편집")
-                            .font(
-                                .headline
-                            )
-                            .foregroundColor(.black)
+                        Button {
+                            showModal2 = true
+                        } label: {
+                            Text("프로필 편집")
+                                .font(
+                                    .headline
+                                )
+                                .foregroundColor(.black)
+                        }
+                        .sheet(isPresented: $showModal2) {
+                            if let user = viewModel2 {
+                                EditProfileSheet(userId: user.id)
+                            } else {
+                                Text("사용자 정보를 불러올 수 없습니다.")
+                            }
+                        }
                     }
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
@@ -62,7 +73,7 @@ struct MyHomeView: View {
                     HStack(alignment: .center, spacing: 0) { // 내가 쓴 질문 가로 프레임 + 버튼
                         Text("내가 쓴 질문")
                             .font(
-                                .title
+                                .title2
                                     .weight(.bold)
                             )
                         
@@ -77,7 +88,7 @@ struct MyHomeView: View {
                         }
                         .sheet(isPresented: $showModal) {
                             if let user = viewModel2 {
-                        EditCardModal(userId: user.id)
+                                EditCardSheet(userId: user.id)
                             } else {
                                 Text("사용자 정보를 불러올 수 없습니다.")
                             }

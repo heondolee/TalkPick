@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 import PhotosUI
 
-struct EditCardModal: View {
+struct EditCardSheet: View {
     
     @Environment(\.dismiss) private var dismiss  // 모달 닫기용
     @Environment(\.modelContext) private var context
@@ -255,5 +255,5 @@ struct EditCardModal: View {
 }
 
 #Preview {
-    EditCardModal(userId: UUID())
+    EditCardSheet(userId: UUID())
 }

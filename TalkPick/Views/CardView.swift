@@ -45,6 +45,7 @@ struct CardView: View {
                             Image(systemName: "photo")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
+                                .padding(12)
                                 .frame(width: 80, height: 80)
                                 .foregroundColor(.gray)
                                 .background(Color.white)
