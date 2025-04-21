@@ -72,7 +72,7 @@ struct EditCardSheet: View {
                         return
                     }
 
-                    if var card = card {
+                    if let card = card {
                         card.question = inputQuestion
                         card.title = selectedTitle
                         card.image = selectedImageData

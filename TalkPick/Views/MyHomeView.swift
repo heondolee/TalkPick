@@ -26,8 +26,8 @@ struct MyHomeView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .center, spacing: 24) { // 전체 세로 프레임
-                HStack(alignment: .bottom, spacing: 18) { // 프로필 세로 프레임
-                    VStack(alignment: .center, spacing: 10) {
+                VStack(alignment: .center, spacing: 18) { // 프로필 세로 프레임
+                    VStack(alignment: .center, spacing: 0) {
                         if let user = viewModel2, // 이런식으로 실제 값이 있는지검사
                            let data = user.imageData,
                            let uiImage = UIImage(data: data) {
@@ -47,9 +47,7 @@ struct MyHomeView: View {
                     .padding(0)
                     .frame(width: 86, height: 86, alignment: .center)
                     .cornerRadius(10000)
-                    
-                    Spacer()
-                    
+                                        
                     VStack(alignment: .leading, spacing: 20) {
                         Text("@\(viewModel2?.name ?? "NoGuest")")
                             .font(
@@ -217,11 +215,8 @@ struct MyHomeView: View {
                                         if let imageData = card.image, let uiImage = UIImage(data: imageData) {
                                             Image(uiImage: uiImage)
                                                 .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .padding(12)
+                                                .aspectRatio(contentMode: .fill)
                                                 .frame(width: 60, height: 60)
-                                                .foregroundColor(.gray)
-                                                .background(Color.black)
                                                 .cornerRadius(5)
                                         } else {
                                             Image(systemName: "photo")
