@@ -253,6 +253,20 @@ struct MyHomeView: View {
                                                 
                                                 Spacer()
                                                 
+                                                if let data = card.author?.imageData,
+                                                   let uiImage = UIImage(data: data) {
+                                                    Image(uiImage: uiImage)
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                        .frame(width: 18, height: 18)
+                                                        .clipShape(Circle())
+                                                } else {
+                                                    Image(systemName: "person.crop.circle.fill")
+                                                        .resizable()
+                                                        .frame(width: 18, height: 18)
+                                                        .foregroundColor(Color(.systemGray4))
+                                                }
+                                                
                                                 if let authorName = card.author?.name {
                                                     Text("@\(authorName)")
                                                         .font(.caption)
