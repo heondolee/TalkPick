@@ -48,7 +48,7 @@ struct MyHomeView: View {
                     .frame(width: 86, height: 86, alignment: .center)
                     .cornerRadius(10000)
                                         
-                    VStack(alignment: .leading, spacing: 20) {
+                    VStack(alignment: .center, spacing: 20) {
                         Text("@\(viewModel2?.name ?? "NoGuest")")
                             .font(
                             .title2
@@ -115,7 +115,7 @@ struct MyHomeView: View {
                             NavigationLink {
                                 Text("카드 상세 또는 수정 화면") // 필요 시 교체
                             } label: {
-                                HStack(alignment: .top, spacing: 12) {
+                                HStack(alignment: .center, spacing: 12) {
                                     
                                     Image(systemName: "photo")
                                         .resizable()
@@ -132,28 +132,31 @@ struct MyHomeView: View {
                                         
                                         Spacer()
                                         
-                                        HStack(alignment: .center){
-                                            
+                                        HStack(alignment: .center) {
                                             Image(systemName: "hand.thumbsup")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
-                                                .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
+                                                .foregroundColor(.gray)
                                                 .frame(width: 18, height: 18)
+                                            
                                             Text("123")
                                                 .font(.caption)
-                                                .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
-                                            
-                                            Spacer()
+                                                .foregroundColor(.gray)
                                             
                                             Text("운동")
                                                 .font(.subheadline)
                                                 .foregroundColor(.gray)
+                                            
+                                            Spacer()
+                                            
                                             Text("@Rundo")
                                                 .font(.caption)
                                                 .foregroundColor(.secondary)
+                                            
                                         }
                                         .padding(.trailing, 12)
                                     }
+                                    .frame(height: 21)
                                 }
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 40)
@@ -163,7 +166,7 @@ struct MyHomeView: View {
                             NavigationLink {
                                 Text("카드 상세 또는 수정 화면") // 필요 시 교체
                             } label: {
-                                HStack(alignment: .top, spacing: 12) {
+                                HStack(alignment: .center, spacing: 12) {
                                     
                                     Image(systemName: "photo")
                                         .resizable()
@@ -180,28 +183,28 @@ struct MyHomeView: View {
                                         
                                         Spacer()
                                         
-                                        HStack(alignment: .center){
-                                            
+                                        HStack(alignment: .center) {
                                             Image(systemName: "hand.thumbsup")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
-                                                .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
+                                                .foregroundColor(.gray)
                                                 .frame(width: 18, height: 18)
                                             Text("123")
                                                 .font(.caption)
-                                                .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
-                                            
-                                            Spacer()
-                                            
+                                                .foregroundColor(.gray)
                                             Text("운동")
                                                 .font(.subheadline)
                                                 .foregroundColor(.gray)
+                                            
+                                            Spacer()
                                             Text("@Rundo")
                                                 .font(.caption)
                                                 .foregroundColor(.secondary)
+                                            
                                         }
                                         .padding(.trailing, 12)
                                     }
+                                    .frame(height: 21)
                                 }
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 40)
@@ -211,7 +214,7 @@ struct MyHomeView: View {
                                 NavigationLink {
                                     EditCardSheet(cardId: card.id)
                                 } label: {
-                                    HStack(alignment: .top, spacing: 12) {
+                                    HStack(alignment: .center, spacing: 12) {
                                         if let imageData = card.image, let uiImage = UIImage(data: imageData) {
                                             Image(uiImage: uiImage)
                                                 .resizable()
@@ -237,17 +240,19 @@ struct MyHomeView: View {
                                                 Image(systemName: "hand.thumbsup")
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fill)
-                                                    .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
+                                                    .foregroundColor(.gray)
                                                     .frame(width: 18, height: 18)
                                                 
                                                 Text("123")
                                                     .font(.caption)
-                                                    .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
+                                                    .foregroundColor(.gray)
                                                 
-                                                Spacer()
                                                 Text(card.title)
                                                     .font(.subheadline)
                                                     .foregroundColor(.gray)
+                                                
+                                                Spacer()
+                                                
                                                 if let authorName = card.author?.name {
                                                     Text("@\(authorName)")
                                                         .font(.caption)
@@ -256,6 +261,7 @@ struct MyHomeView: View {
                                             }
                                             .padding(.trailing, 12)
                                         }
+                                        .frame(height: 21)
                                     }
                                     .frame(maxWidth: .infinity)
                                     .frame(height: 40)
@@ -266,7 +272,7 @@ struct MyHomeView: View {
                         .listStyle(.inset)
                     }
                 }
-                Spacer()
+//                Spacer()
             }
             .navigationTitle("마이홈")
             .task {
