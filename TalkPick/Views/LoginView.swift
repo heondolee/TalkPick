@@ -38,6 +38,15 @@ struct AppleSigninButton : View{
                             let email = appleIDCredential.email
                             let IdentityToken = String(data: appleIDCredential.identityToken!, encoding: .utf8)
                             let AuthorizationCode = String(data: appleIDCredential.authorizationCode!, encoding: .utf8)
+                            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                               let window = windowScene.windows.first {
+                                window.rootViewController = UIHostingController(
+                                    rootView: TabBarView()
+                                        .preferredColorScheme(.light)
+                                        .modelContainer(for: [User.self, Card.self])
+                                )
+                                window.makeKeyAndVisible()
+                            }
                     default:
                         break
                     }
