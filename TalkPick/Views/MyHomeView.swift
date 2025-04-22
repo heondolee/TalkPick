@@ -25,7 +25,7 @@ struct MyHomeView: View {
     
     var body: some View {
         
-        AppleSignInButton()
+//        AppleSignInButton()
         
         NavigationStack {
             VStack(alignment: .center, spacing: 24) { // 전체 세로 프레임

@@ -7,13 +7,13 @@
 
 import SwiftUI
 import SwiftData
-import Firebase
+//import Firebase
 
 @main
 struct TalkPickApp: App {
-    init() {
-            FirebaseApp.configure()
-        }
+//    init() {
+//            FirebaseApp.configure()
+//        }
     
     var body: some Scene {
         WindowGroup {
