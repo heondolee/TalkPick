@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C692B1522DB7C0D200346F67 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C692B1512DB7C0D200346F67 /* FirebaseAnalytics */; };
+		C692B1542DB7C0D200346F67 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C692B1532DB7C0D200346F67 /* FirebaseAuth */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		C6A680882DABDC86000D31E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -42,6 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C692B1522DB7C0D200346F67 /* FirebaseAnalytics in Frameworks */,
+				C692B1542DB7C0D200346F67 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +99,8 @@
 			);
 			name = TalkPick;
 			packageProductDependencies = (
+				C692B1512DB7C0D200346F67 /* FirebaseAnalytics */,
+				C692B1532DB7C0D200346F67 /* FirebaseAuth */,
 			);
 			productName = TalkPick;
 			productReference = C6836ECB2DAFCEAB0040680A /* TalkPick.app */;
@@ -170,6 +179,7 @@
 			mainGroup = C6A6806E2DABDC85000D31E0;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				C692B1502DB7C0D200346F67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C6A6806E2DABDC85000D31E0;
@@ -538,6 +548,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C692B1502DB7C0D200346F67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C692B1512DB7C0D200346F67 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C692B1502DB7C0D200346F67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		C692B1532DB7C0D200346F67 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C692B1502DB7C0D200346F67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C6A6806F2DABDC85000D31E0 /* Project object */;
 }

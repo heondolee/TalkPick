@@ -7,21 +7,30 @@
 
 import SwiftUI
 import SwiftData
-//import Firebase
+import FirebaseCore
+
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
 
 @main
 struct TalkPickApp: App {
-//    init() {
-//            FirebaseApp.configure()
-//        }
-    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var authViewModel = AuthViewModel() // 🔥 전역 상태 공유
+
     var body: some Scene {
         WindowGroup {
-//            TabBarView()
-            LoginView()
-                .preferredColorScheme(.light) // 👉 라이트 모드 고정
+            ContentView()
+                .environmentObject(authViewModel) // ✅ 여기에 주입
+                .preferredColorScheme(.light)
         }
-        .modelContainer(for: [User.self, Card.self]) // SwiftUI 앱에서는 @main struct에서 .modelContainer(for:)를 사용해 모델을 연결해야 합니다.
-        // 이걸 해줘야 SwiftUI 환경에 @Query, @Environment(\.modelContext) 같은 기능이 작동합니다.
+        .modelContainer(for: [User.self, Card.self])
     }
 }
+

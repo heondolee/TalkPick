@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     @StateObject private var viewModel = SearchViewModel()
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -16,6 +17,7 @@ struct SearchView: View {
     ]
 
     var body: some View {
+        
         NavigationStack {
             VStack(alignment: .leading, spacing: 0) {
                 ScrollView {

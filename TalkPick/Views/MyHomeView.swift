@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct MyHomeView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     @Environment(\.modelContext) private var context
     @State private var viewModel: CardViewModel?
@@ -79,6 +80,12 @@ struct MyHomeView: View {
                         .padding(.vertical, 8)
                         .background(Color(.systemGray6))
                         .cornerRadius(60)
+                        Text("환영합니다!")
+                        Text("User ID: \(authViewModel.userID ?? "알 수 없음")")
+                        Button("로그아웃") {
+                            authViewModel.signOut()
+                        }
+                        .foregroundColor(.red)
                     }
                 }
                 .padding(.top, 16)
