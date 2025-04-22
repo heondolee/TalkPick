@@ -40,6 +40,9 @@ class CardViewModel: ObservableObject { // 프로토콜: 클래스가 뷰에 상
         return cards.filter { $0.title == title }
     }
     
+
+    // 좋아요를 누르면 카드
+    
     private func insertMockData() {
         let user = User(name: "임시작성자", imageData: nil)
         context.insert(user)
@@ -58,5 +61,13 @@ class CardViewModel: ObservableObject { // 프로토콜: 클래스가 뷰에 상
         }
 
         try? context.save() // try? context.save()는 저장을 시도하고, 실패하더라도 앱이 멈추지 않게 합니다.
+    }
+    
+    func deleteCard(at offsets: IndexSet, from cards: [Card]) {
+        for index in offsets {
+            let card = cards[index]
+            context.delete(card)
+        }
+        try? context.save()
     }
 }

@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C65C43CC2DB789D200FB4559 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = C65C43CB2DB789D200FB4559 /* FirebaseCore */; };
+		C65C43CE2DB789D900FB4559 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C65C43CD2DB789D900FB4559 /* FirebaseAuth */; };
+		C65C43D02DB789DE00FB4559 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C65C43CF2DB789DE00FB4559 /* FirebaseFirestore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		C6A680882DABDC86000D31E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -42,6 +48,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C65C43CC2DB789D200FB4559 /* FirebaseCore in Frameworks */,
+				C65C43CE2DB789D900FB4559 /* FirebaseAuth in Frameworks */,
+				C65C43D02DB789DE00FB4559 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +71,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C65C43CA2DB789D200FB4559 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C6A6806E2DABDC85000D31E0 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +85,7 @@
 				C6836ECB2DAFCEAB0040680A /* TalkPick.app */,
 				C6836ECC2DAFCEAB0040680A /* TalkPickTests.xctest */,
 				C6836ECD2DAFCEAB0040680A /* TalkPickUITests.xctest */,
+				C65C43CA2DB789D200FB4559 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +109,9 @@
 			);
 			name = TalkPick;
 			packageProductDependencies = (
+				C65C43CB2DB789D200FB4559 /* FirebaseCore */,
+				C65C43CD2DB789D900FB4559 /* FirebaseAuth */,
+				C65C43CF2DB789DE00FB4559 /* FirebaseFirestore */,
 			);
 			productName = TalkPick;
 			productReference = C6836ECB2DAFCEAB0040680A /* TalkPick.app */;
@@ -169,6 +189,9 @@
 			);
 			mainGroup = C6A6806E2DABDC85000D31E0;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C65C43972DB7871D00FB4559 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C6A6806E2DABDC85000D31E0;
 			projectDirPath = "";
@@ -367,11 +390,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TalkPick/TalkPick.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TalkPick/Preview Content\"";
 				DEVELOPMENT_TEAM = 2YBZ5GS4MN;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -396,11 +421,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TalkPick/TalkPick.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TalkPick/Preview Content\"";
 				DEVELOPMENT_TEAM = 2YBZ5GS4MN;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -532,6 +559,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C65C43972DB7871D00FB4559 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C65C43CB2DB789D200FB4559 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C65C43972DB7871D00FB4559 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		C65C43CD2DB789D900FB4559 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C65C43972DB7871D00FB4559 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		C65C43CF2DB789DE00FB4559 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C65C43972DB7871D00FB4559 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C6A6806F2DABDC85000D31E0 /* Project object */;
 }

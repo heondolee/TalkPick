@@ -11,7 +11,7 @@ struct CardView: View {
     let topicTitle: String
     @Environment(\.modelContext) private var context
     @State private var viewModel: CardViewModel?
-
+    
     init(topicTitle: String) {
         self.topicTitle = topicTitle
     }
@@ -72,16 +72,20 @@ struct CardView: View {
                             HStack() {
                                 Spacer()
                                 
-                                HStack(alignment: .center, spacing: 8) {
-                                    Rectangle()
-                                      .foregroundColor(.clear)
-                                      .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                      .background(
-                                        Image(systemName: "hand.thumbsup")
-                                          .resizable()
-                                          .aspectRatio(contentMode: .fill)
-                                          .frame(width: 18, height: 18)
-                                      )
+                                HStack(alignment: .center, spacing: 4) {
+                                    if let data = card.author?.imageData,
+                                       let uiImage = UIImage(data: data) {
+                                        Image(uiImage: uiImage)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 18, height: 18)
+                                            .clipShape(Circle())
+                                    } else {
+                                        Image(systemName: "person.crop.circle.fill")
+                                            .resizable()
+                                            .frame(width: 18, height: 18)
+                                            .foregroundColor(Color(.systemGray4))
+                                    }
                                     Text("@\(card.author?.name ?? "알 수 없음")")
                                       .font(
                                         Font.custom("SF Pro", size: 13)
@@ -122,22 +126,26 @@ struct CardView: View {
                 
                 HStack(alignment: .center, spacing: 64) {
                     VStack(alignment: .center, spacing: 10) {
-                        Image(systemName: "hand.thumbsup")
-                          .font(
-                            Font.custom("SF Pro", size: 40)
-                              .weight(.medium)
-                          )
-                          .multilineTextAlignment(.center)
-                          .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
-                          .frame(width: 104, height: 48, alignment: .center)
-                        Text("좋아요 \n \(filteredCards[currentIndex].likes)K")
-                            .font(
-                                .callout
-                              .weight(.bold)
-                            )
-                          .multilineTextAlignment(.center)
-                          .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
-                          .frame(width: 104, height: 100, alignment: .top)
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "hand.thumbsup")
+                              .font(
+                                Font.custom("SF Pro", size: 40)
+                                  .weight(.medium)
+                              )
+                              .multilineTextAlignment(.center)
+                              .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
+                              .frame(width: 104, height: 48, alignment: .center)
+                            Text("좋아요 \n \(filteredCards[currentIndex].likes)K")
+                                .font(
+                                    .callout
+                                  .weight(.bold)
+                                )
+                              .multilineTextAlignment(.center)
+                              .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
+                              .frame(width: 104, height: 100, alignment: .top)
+                        }
                     }
                     .padding(0)
                     .frame(width: 104, height: 112, alignment: .top)

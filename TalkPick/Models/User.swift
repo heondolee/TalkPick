@@ -16,6 +16,12 @@ class User {
     @Relationship(deleteRule: .cascade) // @Relationship을 통해 User가 소유한 DetailedCard 목록을 정의, deleteRule: .cascade: 유저 삭제 시 카드도 같이 삭제됨.
     var cards: [Card]?
 
+    @Relationship(deleteRule: .nullify)
+    var likedCards: [Card] = []
+
+    @Relationship(deleteRule: .nullify)
+    var dislikedCards: [Card] = []
+
 
     init(id: UUID = UUID(), name: String, imageData: Data?) {
         self.id = id // id만 UUID()를 통해 기본적으로 생성된다.

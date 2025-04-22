@@ -24,6 +24,9 @@ struct MyHomeView: View {
     @State private var showModal2 = false
     
     var body: some View {
+        
+        AppleSignInButton()
+        
         NavigationStack {
             VStack(alignment: .center, spacing: 24) { // 전체 세로 프레임
                 VStack(alignment: .center, spacing: 18) { // 프로필 세로 프레임
@@ -110,106 +113,106 @@ struct MyHomeView: View {
                     
                     VStack {
                         
-                        // 프리뷰용 코드
+                        // 프리뷰용 코드 ㅣ
                         List {
-                            NavigationLink {
-                                Text("카드 상세 또는 수정 화면") // 필요 시 교체
-                            } label: {
-                                HStack(alignment: .center, spacing: 12) {
-                                    
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .padding(12)
-                                        .frame(width: 60, height: 60)
-                                        .foregroundColor(.gray)
-                                        .background(Color(.systemGray6))
-                                        .cornerRadius(5)
-                                    
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text("안녕하세요~~~!!")
-                                            .font(.headline)
-                                        
-                                        Spacer()
-                                        
-                                        HStack(alignment: .center) {
-                                            Image(systemName: "hand.thumbsup")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .foregroundColor(.gray)
-                                                .frame(width: 18, height: 18)
-                                            
-                                            Text("123")
-                                                .font(.caption)
-                                                .foregroundColor(.gray)
-                                            
-                                            Text("운동")
-                                                .font(.subheadline)
-                                                .foregroundColor(.gray)
-                                            
-                                            Spacer()
-                                            
-                                            Text("@Rundo")
-                                                .font(.caption)
-                                                .foregroundColor(.secondary)
-                                            
-                                        }
-                                        .padding(.trailing, 12)
-                                    }
-                                    .frame(height: 21)
-                                }
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 40)
-                                .padding(.vertical, 12)
-                            }
-                            
-                            NavigationLink {
-                                Text("카드 상세 또는 수정 화면") // 필요 시 교체
-                            } label: {
-                                HStack(alignment: .center, spacing: 12) {
-                                    
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .padding(12)
-                                        .frame(width: 60, height: 60)
-                                        .foregroundColor(.gray)
-                                        .background(Color(.systemGray6))
-                                        .cornerRadius(5)
-                                    
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text("안녕하세요~~~!!")
-                                            .font(.headline)
-                                        
-                                        Spacer()
-                                        
-                                        HStack(alignment: .center) {
-                                            Image(systemName: "hand.thumbsup")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .foregroundColor(.gray)
-                                                .frame(width: 18, height: 18)
-                                            Text("123")
-                                                .font(.caption)
-                                                .foregroundColor(.gray)
-                                            Text("운동")
-                                                .font(.subheadline)
-                                                .foregroundColor(.gray)
-                                            
-                                            Spacer()
-                                            Text("@Rundo")
-                                                .font(.caption)
-                                                .foregroundColor(.secondary)
-                                            
-                                        }
-                                        .padding(.trailing, 12)
-                                    }
-                                    .frame(height: 21)
-                                }
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 40)
-                                .padding(.vertical, 12)
-                            }
+                            //                            NavigationLink {
+                            //                                Text("카드 상세 또는 수정 화면") // 필요 시 교체
+                            //                            } label: {
+                            //                                HStack(alignment: .center, spacing: 12) {
+                            //
+                            //                                    Image(systemName: "photo")
+                            //                                        .resizable()
+                            //                                        .aspectRatio(contentMode: .fit)
+                            //                                        .padding(12)
+                            //                                        .frame(width: 60, height: 60)
+                            //                                        .foregroundColor(.gray)
+                            //                                        .background(Color(.systemGray6))
+                            //                                        .cornerRadius(5)
+                            //
+                            //                                    VStack(alignment: .leading, spacing: 4) {
+                            //                                        Text("안녕하세요~~~!!")
+                            //                                            .font(.headline)
+                            //
+                            //                                        Spacer()
+                            //
+                            //                                        HStack(alignment: .center) {
+                            //                                            Image(systemName: "hand.thumbsup")
+                            //                                                .resizable()
+                            //                                                .aspectRatio(contentMode: .fill)
+                            //                                                .foregroundColor(.gray)
+                            //                                                .frame(width: 18, height: 18)
+                            //
+                            //                                            Text("123")
+                            //                                                .font(.caption)
+                            //                                                .foregroundColor(.gray)
+                            //
+                            //                                            Text("운동")
+                            //                                                .font(.subheadline)
+                            //                                                .foregroundColor(.gray)
+                            //
+                            //                                            Spacer()
+                            //
+                            //                                            Text("@Rundo")
+                            //                                                .font(.caption)
+                            //                                                .foregroundColor(.secondary)
+                            //
+                            //                                        }
+                            //                                        .padding(.trailing, 12)
+                            //                                    }
+                            //                                    .frame(height: 21)
+                            //                                }
+                            //                                .frame(maxWidth: .infinity)
+                            //                                .frame(height: 40)
+                            //                                .padding(.vertical, 12)
+                            //                            }
+                            //
+                            //                            NavigationLink {
+                            //                                Text("카드 상세 또는 수정 화면") // 필요 시 교체
+                            //                            } label: {
+                            //                                HStack(alignment: .center, spacing: 12) {
+                            //
+                            //                                    Image(systemName: "photo")
+                            //                                        .resizable()
+                            //                                        .aspectRatio(contentMode: .fit)
+                            //                                        .padding(12)
+                            //                                        .frame(width: 60, height: 60)
+                            //                                        .foregroundColor(.gray)
+                            //                                        .background(Color(.systemGray6))
+                            //                                        .cornerRadius(5)
+                            //
+                            //                                    VStack(alignment: .leading, spacing: 4) {
+                            //                                        Text("안녕하세요~~~!!")
+                            //                                            .font(.headline)
+                            //
+                            //                                        Spacer()
+                            //
+                            //                                        HStack(alignment: .center) {
+                            //                                            Image(systemName: "hand.thumbsup")
+                            //                                                .resizable()
+                            //                                                .aspectRatio(contentMode: .fill)
+                            //                                                .foregroundColor(.gray)
+                            //                                                .frame(width: 18, height: 18)
+                            //                                            Text("123")
+                            //                                                .font(.caption)
+                            //                                                .foregroundColor(.gray)
+                            //                                            Text("운동")
+                            //                                                .font(.subheadline)
+                            //                                                .foregroundColor(.gray)
+                            //
+                            //                                            Spacer()
+                            //                                            Text("@Rundo")
+                            //                                                .font(.caption)
+                            //                                                .foregroundColor(.secondary)
+                            //
+                            //                                        }
+                            //                                        .padding(.trailing, 12)
+                            //                                    }
+                            //                                    .frame(height: 21)
+                            //                                }
+                            //                                .frame(maxWidth: .infinity)
+                            //                                .frame(height: 40)
+                            //                                .padding(.vertical, 12)
+                            //                            }
                             ForEach(userCards, id: \.id) { card in
                                 NavigationLink {
                                     EditCardSheet(cardId: card.id)
@@ -231,7 +234,7 @@ struct MyHomeView: View {
                                                 .background(Color(.systemGray6))
                                                 .cornerRadius(5)
                                         }
-
+                                        
                                         VStack(alignment: .leading, spacing: 4) {
                                             Text(card.question)
                                                 .font(.headline)
@@ -281,6 +284,9 @@ struct MyHomeView: View {
                                     .frame(height: 40)
                                     .padding(.vertical, 12)
                                 }
+                            }
+                            .onDelete { offsets in
+                                viewModel?.deleteCard(at: offsets, from: userCards)
                             }
                         }
                         .listStyle(.inset)

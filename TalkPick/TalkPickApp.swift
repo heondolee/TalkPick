@@ -7,9 +7,14 @@
 
 import SwiftUI
 import SwiftData
+import Firebase
 
 @main
 struct TalkPickApp: App {
+    init() {
+            FirebaseApp.configure()
+        }
+    
     var body: some Scene {
         WindowGroup {
             TabBarView()
