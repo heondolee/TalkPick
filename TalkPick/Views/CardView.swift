@@ -125,30 +125,30 @@ struct CardView: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 
                 HStack(alignment: .center, spacing: 64) {
-                    VStack(alignment: .center, spacing: 10) {
-                        Button {
-                            
-                        } label: {
+                    Button {
+                        
+                    } label: {
+                        VStack(alignment: .center, spacing: 10) {
                             Image(systemName: "hand.thumbsup")
-                              .font(
-                                Font.custom("SF Pro", size: 40)
-                                  .weight(.medium)
-                              )
-                              .multilineTextAlignment(.center)
-                              .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
-                              .frame(width: 104, height: 48, alignment: .center)
+                                .font(
+                                    Font.custom("SF Pro", size: 40)
+                                        .weight(.medium)
+                                )
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
+                                .frame(width: 104, height: 48, alignment: .center)
                             Text("좋아요 \n \(filteredCards[currentIndex].likes)K")
                                 .font(
                                     .callout
-                                  .weight(.bold)
+                                        .weight(.bold)
                                 )
-                              .multilineTextAlignment(.center)
-                              .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
-                              .frame(width: 104, height: 100, alignment: .top)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
+                                .frame(width: 104, height: 100, alignment: .top)
                         }
+                        .padding(0)
+                        .frame(width: 104, height: 112, alignment: .top)
                     }
-                    .padding(0)
-                    .frame(width: 104, height: 112, alignment: .top)
                     
                     VStack(alignment: .center, spacing: 10) {
                         Image(systemName: "hand.thumbsdown")
