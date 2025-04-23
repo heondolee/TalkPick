@@ -10,11 +10,11 @@ import SwiftData
 import PhotosUI
 
 struct EditProfileSheet: View {
-    
+    @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss  // 모달 닫기용
     @Environment(\.modelContext) private var context
     
-    let userId: UUID // 유저 아이디를 받는다
+    let userId: String // 유저 아이디를 받는다
     @State private var user: User?
 
     @State private var showAlert: Bool = false
@@ -114,8 +114,13 @@ struct EditProfileSheet: View {
         }
         .padding(.top)
         .onAppear {
+            guard let userID = authViewModel.userID else {
+                print("유저 ID가 없습니다.")
+                return
+            }
+
             let descriptor = FetchDescriptor<User>(
-                predicate: #Predicate { $0.id == userId }
+                predicate: #Predicate { $0.id == userID }
             )
             do {
                 let result = try context.fetch(descriptor)
@@ -131,6 +136,6 @@ struct EditProfileSheet: View {
     }
 }
 
-#Preview {
-    EditProfileSheet(userId: UUID())
-}
+//#Preview {
+//    EditProfileSheet(userId: UUID())
+//}

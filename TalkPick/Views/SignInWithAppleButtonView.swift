@@ -59,32 +59,43 @@ struct SignInWithAppleButtonView: View {
             }
 
             guard let user = result?.user else { return }
+            // 여기서 부터 셀프
             let userID = user.uid
+            print("userID: ", userID)
 
             Task {
-                let container = try? ModelContainer(for: User.self)
-                guard let context = container?.mainContext else { return }
-
-                guard let userUUID = UUID(uuidString: userID) else { return }
-
                 let fetchDescriptor = FetchDescriptor<User>(
-                    predicate: #Predicate { $0.id == userUUID }
+                    predicate: #Predicate<User> { user in
+                        user.id == userID
+                    }
                 )
-
                 var userModel = try? context.fetch(fetchDescriptor).first
+                print("모델을 꺼냄")
+                
+                let allUsers = try? context.fetch(FetchDescriptor<User>())
+                print("전체 사용자 수: \(allUsers?.count ?? 0)")
+                if let match = allUsers?.first(where: { $0.id == userID }) {
+                    userModel = match
+                }
+
+
 
                 if userModel == nil {
-                    let newUser = User(id: userUUID,
+                    print("모델이 없음")
+
+                    let newUser = User(id: userID,
                                        name: user.displayName ?? "이름을 편집하세요",
                                        imageData: nil)
                     context.insert(newUser)
-                    try? context.save()
+                    try context.save()
                     print("🟢 New user created: \(newUser.name), ID: \(newUser.id)")
                     userModel = newUser
+                } else {
+                    print("모델이 이미 있음")
                 }
 
                 DispatchQueue.main.async {
-                    authViewModel.userID = userModel?.id.uuidString
+                    authViewModel.userID = userModel?.id
                     authViewModel.isLoggedIn = true
                     print("✅ Login successful. UserID: \(authViewModel.userID ?? "nil"), isLoggedIn: \(authViewModel.isLoggedIn)")
                 }

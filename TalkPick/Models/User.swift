@@ -9,7 +9,7 @@ import Foundation
 
 @Model
 class User {
-    @Attribute(.unique) var id: UUID // @Attribute(.unique)는 SwiftData가 id를 중복 없이 관리하도록 함.
+    @Attribute(.unique) var id: String // @Attribute(.unique)는 SwiftData가 id를 중복 없이 관리하도록 함.
     @Attribute(.unique) var name: String
     var imageData: Data?
     
@@ -23,8 +23,8 @@ class User {
     var dislikedCards: [Card] = []
 
 
-    init(id: UUID = UUID(), name: String, imageData: Data?) {
-        self.id = id // id만 UUID()를 통해 기본적으로 생성된다.
+    init(id: String, name: String, imageData: Data?) {
+        self.id = id
         self.name = name
         self.imageData = imageData
     }

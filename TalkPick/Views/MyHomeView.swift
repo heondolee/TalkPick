@@ -304,17 +304,19 @@ struct MyHomeView: View {
             .navigationTitle("마이홈")
             .task {
                 do {
-                    guard let userID = authViewModel.userID,
-                          let uuid = UUID(uuidString: userID) else {
+                    guard let userID = authViewModel.userID else {
                         print("Invalid user ID")
                         return
                     }
 
                     let descriptor = FetchDescriptor<User>(
-                        predicate: #Predicate { $0.id == uuid }
+                        predicate: #Predicate { $0.id == userID }
                     )
 
                     viewModel2 = try context.fetch(descriptor).first
+                    
+                    let name = viewModel2?.name
+                    print("name: \(name ?? "nil")")
                 } catch {
                     print("유저 fetch 실패: \(error)")
                     viewModel2 = nil

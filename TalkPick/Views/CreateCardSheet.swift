@@ -14,7 +14,7 @@ struct CreateCardSheet: View {
     @Environment(\.dismiss) private var dismiss  // 모달 닫기용
     @Environment(\.modelContext) private var context
     
-    let userId: UUID // 유저 아이디를 받는다
+    let userId: String // 유저 아이디를 받는다
     @State private var user: User?
 
     @State private var cardVM: CardViewModel?
@@ -253,6 +253,6 @@ struct CreateCardSheet: View {
     }
 }
 
-#Preview {
-    CreateCardSheet(userId: UUID())
-}
+//#Preview {
+//    CreateCardSheet(userId: UUID())
+//}

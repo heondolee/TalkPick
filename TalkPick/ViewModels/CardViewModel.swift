@@ -26,11 +26,11 @@ class CardViewModel: ObservableObject { // 프로토콜: 클래스가 뷰에 상
             let descriptor = FetchDescriptor<Card>() // Card타입의 데이터를 모두 가져오겠다.
             cards = try context.fetch(descriptor)
             
-            // 데이터 없으면 mock 삽입
-            if cards.isEmpty {
-                insertMockData()
-                cards = try context.fetch(descriptor)
-            }
+//            // 데이터 없으면 mock 삽입
+//            if cards.isEmpty {
+//                insertMockData()
+//                cards = try context.fetch(descriptor)
+//            }
         } catch {
             print("Error loading cards: \(error)")
         }
@@ -43,25 +43,25 @@ class CardViewModel: ObservableObject { // 프로토콜: 클래스가 뷰에 상
 
     // 좋아요를 누르면 카드
     
-    private func insertMockData() {
-        let user = User(name: "임시작성자", imageData: nil)
-        context.insert(user)
-
-        for sample in mockCardData {
-            let newCard = Card(
-                author: user,
-                question: sample.question,
-                title: sample.title,
-                likes: Int(sample.likes) ?? 0,
-                dislikes: Int(sample.dislikes) ?? 0,
-                image: sample.image,
-                updatedAt: sample.updatedAt
-            )
-            context.insert(newCard)
-        }
-
-        try? context.save() // try? context.save()는 저장을 시도하고, 실패하더라도 앱이 멈추지 않게 합니다.
-    }
+//    private func insertMockData() {
+//        let user = User(name: "임시작성자", imageData: nil)
+//        context.insert(user)
+//
+//        for sample in mockCardData {
+//            let newCard = Card(
+//                author: user,
+//                question: sample.question,
+//                title: sample.title,
+//                likes: Int(sample.likes) ?? 0,
+//                dislikes: Int(sample.dislikes) ?? 0,
+//                image: sample.image,
+//                updatedAt: sample.updatedAt
+//            )
+//            context.insert(newCard)
+//        }
+//
+//        try? context.save() // try? context.save()는 저장을 시도하고, 실패하더라도 앱이 멈추지 않게 합니다.
+//    }
     
     func deleteCard(at offsets: IndexSet, from cards: [Card]) {
         for index in offsets {
