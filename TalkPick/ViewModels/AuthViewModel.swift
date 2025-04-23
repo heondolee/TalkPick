@@ -15,7 +15,7 @@ class AuthViewModel: ObservableObject {
     init() {
         if let currentUser = Auth.auth().currentUser {
             self.userID = currentUser.uid
-            self.isLoggedIn = false
+            self.isLoggedIn = true
         }
     }
 
