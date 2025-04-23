@@ -23,7 +23,7 @@ func randomNonceString(length: Int = 32) -> String {
     while remainingLength > 0 {
         let randoms: [UInt8] = (0..<16).map { _ in
             var random: UInt8 = 0
-            SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+//            SecRandomCopyBytes(kSecRandomDefault, 1, &random)
             return random
         }
 

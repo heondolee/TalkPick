@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C613BF602DB8CE58002239BA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C613BF5F2DB8CE58002239BA /* FirebaseAnalytics */; };
+		C613BF622DB8CE58002239BA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C613BF612DB8CE58002239BA /* FirebaseAuth */; };
 		C692B1522DB7C0D200346F67 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C692B1512DB7C0D200346F67 /* FirebaseAnalytics */; };
 		C692B1542DB7C0D200346F67 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C692B1532DB7C0D200346F67 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
@@ -56,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C613BF602DB8CE58002239BA /* FirebaseAnalytics in Frameworks */,
+				C613BF622DB8CE58002239BA /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +125,8 @@
 			);
 			name = TalkPickTests;
 			packageProductDependencies = (
+				C613BF5F2DB8CE58002239BA /* FirebaseAnalytics */,
+				C613BF612DB8CE58002239BA /* FirebaseAuth */,
 			);
 			productName = TalkPickTests;
 			productReference = C6836ECC2DAFCEAB0040680A /* TalkPickTests.xctest */;
@@ -561,6 +567,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C613BF5F2DB8CE58002239BA /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C692B1502DB7C0D200346F67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		C613BF612DB8CE58002239BA /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C692B1502DB7C0D200346F67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
 		C692B1512DB7C0D200346F67 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C692B1502DB7C0D200346F67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

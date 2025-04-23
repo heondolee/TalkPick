@@ -9,9 +9,12 @@ import SwiftUI
 import AuthenticationServices
 import FirebaseAuth
 import CryptoKit
+import SwiftData
 
 struct SignInWithAppleButtonView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @Environment(\.modelContext) private var context
+    @State private var viewModel: User?
     @State private var currentNonce: String?
 
     var body: some View {
@@ -56,9 +59,35 @@ struct SignInWithAppleButtonView: View {
             }
 
             guard let user = result?.user else { return }
-            DispatchQueue.main.async {
-                authViewModel.userID = user.uid
-                authViewModel.isLoggedIn = true
+            let userID = user.uid
+
+            Task {
+                let container = try? ModelContainer(for: User.self)
+                guard let context = container?.mainContext else { return }
+
+                guard let userUUID = UUID(uuidString: userID) else { return }
+
+                let fetchDescriptor = FetchDescriptor<User>(
+                    predicate: #Predicate { $0.id == userUUID }
+                )
+
+                var userModel = try? context.fetch(fetchDescriptor).first
+
+                if userModel == nil {
+                    let newUser = User(id: userUUID,
+                                       name: user.displayName ?? "이름을 편집하세요",
+                                       imageData: nil)
+                    context.insert(newUser)
+                    try? context.save()
+                    print("🟢 New user created: \(newUser.name), ID: \(newUser.id)")
+                    userModel = newUser
+                }
+
+                DispatchQueue.main.async {
+                    authViewModel.userID = userModel?.id.uuidString
+                    authViewModel.isLoggedIn = true
+                    print("✅ Login successful. UserID: \(authViewModel.userID ?? "nil"), isLoggedIn: \(authViewModel.isLoggedIn)")
+                }
             }
         }
     }

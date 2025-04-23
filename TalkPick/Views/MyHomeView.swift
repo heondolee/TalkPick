@@ -303,24 +303,21 @@ struct MyHomeView: View {
             }
             .navigationTitle("마이홈")
             .task {
-                let descriptor = FetchDescriptor<User>()
-                if let users = try? context.fetch(descriptor), users.count == 1 {
-                    let tempUser = User(name: "Guest", imageData: Data())
-                    context.insert(tempUser)
-                    try? context.save()
-                    viewModel2 = tempUser
-                } else {
-                    do {
-                        let users = try context.fetch(descriptor)
-                        if users.indices.contains(1) {
-                            viewModel2 = users[1]
-                        } else {
-                            viewModel2 = users.first
-                        }
-                    } catch {
-                        print("유저 fetch 실패: \(error)")
-                        viewModel2 = nil
+                do {
+                    guard let userID = authViewModel.userID,
+                          let uuid = UUID(uuidString: userID) else {
+                        print("Invalid user ID")
+                        return
                     }
+
+                    let descriptor = FetchDescriptor<User>(
+                        predicate: #Predicate { $0.id == uuid }
+                    )
+
+                    viewModel2 = try context.fetch(descriptor).first
+                } catch {
+                    print("유저 fetch 실패: \(error)")
+                    viewModel2 = nil
                 }
             }
         }

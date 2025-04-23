@@ -27,7 +27,7 @@ struct TalkPickApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(authViewModel) // ✅ 여기에 주입
+                .environmentObject(authViewModel)
                 .preferredColorScheme(.light)
         }
         .modelContainer(for: [User.self, Card.self])

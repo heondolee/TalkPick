@@ -10,6 +10,7 @@ import SwiftUI
 struct CardView: View {
     let topicTitle: String
     @Environment(\.modelContext) private var context
+    @EnvironmentObject var authViewModel: AuthViewModel // 카드 좋아요 누를때
     @State private var viewModel: CardViewModel?
     
     init(topicTitle: String) {

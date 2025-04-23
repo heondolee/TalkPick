@@ -29,3 +29,4 @@ class User {
         self.imageData = imageData
     }
 }
+
