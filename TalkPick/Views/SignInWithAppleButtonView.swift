@@ -72,13 +72,11 @@ struct SignInWithAppleButtonView: View {
                 var userModel = try? context.fetch(fetchDescriptor).first
                 print("모델을 꺼냄")
                 
-                let allUsers = try? context.fetch(FetchDescriptor<User>())
-                print("전체 사용자 수: \(allUsers?.count ?? 0)")
-                if let match = allUsers?.first(where: { $0.id == userID }) {
-                    userModel = match
-                }
-
-
+//                let allUsers = try? context.fetch(FetchDescriptor<User>())
+//                print("전체 사용자 수: \(allUsers?.count ?? 0)")
+//                if let match = allUsers?.first(where: { $0.id == userID }) {
+//                    userModel = match
+//                }
 
                 if userModel == nil {
                     print("모델이 없음")

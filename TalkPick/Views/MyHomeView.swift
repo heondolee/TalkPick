@@ -80,12 +80,10 @@ struct MyHomeView: View {
                         .padding(.vertical, 8)
                         .background(Color(.systemGray6))
                         .cornerRadius(60)
-                        Text("환영합니다!")
-                        Text("User ID: \(authViewModel.userID ?? "알 수 없음")")
                         Button("로그아웃") {
                             authViewModel.signOut()
                         }
-                        .foregroundColor(.red)
+                        .foregroundColor(.blue)
                     }
                 }
                 .padding(.top, 16)
@@ -93,7 +91,7 @@ struct MyHomeView: View {
                 
                 VStack() { // 내가 쓴 질문 + 질문 리스트
                     HStack(alignment: .center, spacing: 0) { // 내가 쓴 질문 가로 프레임 + 버튼
-                        Text("내가 쓴 질문")
+                        Text("나의 질문")
                             .font(
                                 .title2
                                     .weight(.bold)
