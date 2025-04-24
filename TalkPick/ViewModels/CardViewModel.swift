@@ -43,11 +43,30 @@ class CardViewModel: ObservableObject { // 프로토콜: 클래스가 뷰에 상
     // 좋아요
     
     func likeCard(_ card: Card, by user: User) {
-        // 중복 좋아요 방지
-        if !user.likedCards.contains(where: { $0.id == card.id }) {
-            user.likedCards.append(card)
-            try? context.save()
+        if let index = user.likedCards.firstIndex(where: { $0.id == card.id }) {
+            user.likedCards.remove(at: index) // Unlike
+        } else {
+            card.updatedAt = Date() // Update timestamp to now
+            user.likedCards.append(card) // Like
+            // Remove from dislikes if it exists
+            if let dislikeIndex = user.dislikedCards.firstIndex(where: { $0.id == card.id }) {
+                user.dislikedCards.remove(at: dislikeIndex)
+            }
         }
+        try? context.save()
+    }
+
+    func dislikeCard(_ card: Card, by user: User) {
+        if let index = user.dislikedCards.firstIndex(where: { $0.id == card.id }) {
+            user.dislikedCards.remove(at: index) // Remove dislike
+        } else {
+            user.dislikedCards.append(card) // Dislike
+            // Remove from likes if it exists
+            if let likeIndex = user.likedCards.firstIndex(where: { $0.id == card.id }) {
+                user.likedCards.remove(at: likeIndex)
+            }
+        }
+        try? context.save()
     }
     
     private func insertMockData() {

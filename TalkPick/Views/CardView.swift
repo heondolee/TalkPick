@@ -147,47 +147,53 @@ struct CardView: View {
                         }
                     } label: {
                         VStack(alignment: .center, spacing: 10) {
-                            Image(systemName: "hand.thumbsup")
+                            Image(systemName: (viewModel2?.likedCards.contains(where: { $0.id == filteredCards[currentIndex].id }) ?? false) ? "hand.thumbsup.fill" : "hand.thumbsup")
                                 .font(
                                     Font.custom("SF Pro", size: 40)
                                         .weight(.medium)
                                 )
                                 .multilineTextAlignment(.center)
-                                .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
+                                .foregroundColor((viewModel2?.likedCards.contains(where: { $0.id == filteredCards[currentIndex].id }) ?? false) ? Color(red: 1, green: 0.27, blue: 0.27) : .gray)
                                 .frame(width: 104, height: 48, alignment: .center)
-                            Text("좋아요 \n \(filteredCards[currentIndex].likes)K")
+                            Text("좋아요 \n \(filteredCards[currentIndex].likes)")
                                 .font(
                                     .callout
                                         .weight(.bold)
                                 )
                                 .multilineTextAlignment(.center)
-                                .foregroundColor(Color(red: 1, green: 0.27, blue: 0.27))
+                                .foregroundColor((viewModel2?.likedCards.contains(where: { $0.id == filteredCards[currentIndex].id }) ?? false) ? Color(red: 1, green: 0.27, blue: 0.27) : .gray)
                                 .frame(width: 104, height: 100, alignment: .top)
                         }
                         .padding(0)
                         .frame(width: 104, height: 112, alignment: .top)
                     }
                     
-                    VStack(alignment: .center, spacing: 10) {
-                        Image(systemName: "hand.thumbsdown")
-                          .font(
-                            Font.custom("SF Pro", size: 40)
-                              .weight(.medium)
-                          )
-                          .foregroundStyle(.secondary)
-                          .multilineTextAlignment(.center)
-                          .frame(width: 104, height: 48, alignment: .center)
-                        
-                        Text("별로예요\n1K")
-                            .font(
-                                .callout
-                              .weight(.bold)
-                            )
-                          .multilineTextAlignment(.center)
-                          .foregroundStyle(.secondary)
-                          .frame(width: 104, height: 48, alignment: .top)
+                    Button {
+                        if let user = viewModel2 {
+                            let card = filteredCards[currentIndex]
+                            viewModel?.dislikeCard(card, by: user)
+                        }
+                    } label: {
+                        VStack(alignment: .center, spacing: 10) {
+                            Image(systemName: (viewModel2?.dislikedCards.contains(where: { $0.id == filteredCards[currentIndex].id }) ?? false) ? "hand.thumbsdown.fill" : "hand.thumbsdown")
+                                .font(
+                                    Font.custom("SF Pro", size: 40)
+                                        .weight(.medium)
+                                )
+                                .multilineTextAlignment(.center)
+                                .foregroundColor((viewModel2?.dislikedCards.contains(where: { $0.id == filteredCards[currentIndex].id }) ?? false) ? .blue : .gray)
+                                .frame(width: 104, height: 48, alignment: .center)
+
+                            Text("별로예요\n1K")
+                                .font(
+                                    .callout
+                                        .weight(.bold)
+                                )
+                                .multilineTextAlignment(.center)
+                                .foregroundColor((viewModel2?.dislikedCards.contains(where: { $0.id == filteredCards[currentIndex].id }) ?? false) ? .blue : .gray)
+                                .frame(width: 104, height: 48, alignment: .top)
+                        }
                     }
-                    .padding(0)
                     .frame(width: 104, height: 112, alignment: .top)
                 }
                 .padding(0)

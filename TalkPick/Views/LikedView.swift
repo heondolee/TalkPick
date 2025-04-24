@@ -19,7 +19,7 @@ struct LikedView: View {
     
     var likedCards: [Card] {
         guard let userId = viewModel2?.id else { return [] }
-        return allUsers.first(where: { $0.id == userId })?.likedCards ?? []
+        return allUsers.first(where: { $0.id == userId })?.likedCards.sorted(by: { $0.updatedAt > $1.updatedAt }) ?? []
     }
 
     var body: some View {
@@ -106,9 +106,6 @@ struct LikedView: View {
                                 .frame(height: 40)
                                 .padding(.vertical, 12)
                             }
-                        }
-                        .onDelete { offsets in
-                            viewModel?.deleteCard(at: offsets, from: likedCards)
                         }
                     }
                     .listStyle(.inset)
