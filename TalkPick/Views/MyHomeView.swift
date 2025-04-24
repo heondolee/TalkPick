@@ -117,184 +117,185 @@ struct MyHomeView: View {
                     .padding(.horizontal, 16)
                     
                     VStack {
-                        
-                        // 프리뷰용 코드 ㅣ
-                        List {
-                            //                            NavigationLink {
-                            //                                Text("카드 상세 또는 수정 화면") // 필요 시 교체
-                            //                            } label: {
-                            //                                HStack(alignment: .center, spacing: 12) {
-                            //
-                            //                                    Image(systemName: "photo")
-                            //                                        .resizable()
-                            //                                        .aspectRatio(contentMode: .fit)
-                            //                                        .padding(12)
-                            //                                        .frame(width: 60, height: 60)
-                            //                                        .foregroundColor(.gray)
-                            //                                        .background(Color(.systemGray6))
-                            //                                        .cornerRadius(5)
-                            //
-                            //                                    VStack(alignment: .leading, spacing: 4) {
-                            //                                        Text("안녕하세요~~~!!")
-                            //                                            .font(.headline)
-                            //
-                            //                                        Spacer()
-                            //
-                            //                                        HStack(alignment: .center) {
-                            //                                            Image(systemName: "hand.thumbsup")
-                            //                                                .resizable()
-                            //                                                .aspectRatio(contentMode: .fill)
-                            //                                                .foregroundColor(.gray)
-                            //                                                .frame(width: 18, height: 18)
-                            //
-                            //                                            Text("123")
-                            //                                                .font(.caption)
-                            //                                                .foregroundColor(.gray)
-                            //
-                            //                                            Text("운동")
-                            //                                                .font(.subheadline)
-                            //                                                .foregroundColor(.gray)
-                            //
-                            //                                            Spacer()
-                            //
-                            //                                            Text("@Rundo")
-                            //                                                .font(.caption)
-                            //                                                .foregroundColor(.secondary)
-                            //
-                            //                                        }
-                            //                                        .padding(.trailing, 12)
-                            //                                    }
-                            //                                    .frame(height: 21)
-                            //                                }
-                            //                                .frame(maxWidth: .infinity)
-                            //                                .frame(height: 40)
-                            //                                .padding(.vertical, 12)
-                            //                            }
-                            //
-                            //                            NavigationLink {
-                            //                                Text("카드 상세 또는 수정 화면") // 필요 시 교체
-                            //                            } label: {
-                            //                                HStack(alignment: .center, spacing: 12) {
-                            //
-                            //                                    Image(systemName: "photo")
-                            //                                        .resizable()
-                            //                                        .aspectRatio(contentMode: .fit)
-                            //                                        .padding(12)
-                            //                                        .frame(width: 60, height: 60)
-                            //                                        .foregroundColor(.gray)
-                            //                                        .background(Color(.systemGray6))
-                            //                                        .cornerRadius(5)
-                            //
-                            //                                    VStack(alignment: .leading, spacing: 4) {
-                            //                                        Text("안녕하세요~~~!!")
-                            //                                            .font(.headline)
-                            //
-                            //                                        Spacer()
-                            //
-                            //                                        HStack(alignment: .center) {
-                            //                                            Image(systemName: "hand.thumbsup")
-                            //                                                .resizable()
-                            //                                                .aspectRatio(contentMode: .fill)
-                            //                                                .foregroundColor(.gray)
-                            //                                                .frame(width: 18, height: 18)
-                            //                                            Text("123")
-                            //                                                .font(.caption)
-                            //                                                .foregroundColor(.gray)
-                            //                                            Text("운동")
-                            //                                                .font(.subheadline)
-                            //                                                .foregroundColor(.gray)
-                            //
-                            //                                            Spacer()
-                            //                                            Text("@Rundo")
-                            //                                                .font(.caption)
-                            //                                                .foregroundColor(.secondary)
-                            //
-                            //                                        }
-                            //                                        .padding(.trailing, 12)
-                            //                                    }
-                            //                                    .frame(height: 21)
-                            //                                }
-                            //                                .frame(maxWidth: .infinity)
-                            //                                .frame(height: 40)
-                            //                                .padding(.vertical, 12)
-                            //                            }
-                            ForEach(userCards, id: \.id) { card in
-                                NavigationLink {
-                                    EditCardSheet(cardId: card.id)
-                                } label: {
-                                    HStack(alignment: .center, spacing: 12) {
-                                        if let imageData = card.image, let uiImage = UIImage(data: imageData) {
-                                            Image(uiImage: uiImage)
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .frame(width: 60, height: 60)
-                                                .cornerRadius(5)
-                                        } else {
-                                            Image(systemName: "photo")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .padding(12)
-                                                .frame(width: 60, height: 60)
-                                                .foregroundColor(.gray)
-                                                .background(Color(.systemGray6))
-                                                .cornerRadius(5)
-                                        }
-                                        
-                                        VStack(alignment: .leading, spacing: 4) {
-                                            Text(card.question)
-                                                .font(.headline)
-                                            Spacer()
-                                            HStack(alignment: .center){
-                                                Image(systemName: "hand.thumbsup")
+                        if !userCards.isEmpty {
+                            // 프리뷰용 코드
+                            List {
+                                //                            NavigationLink {
+                                //                                Text("카드 상세 또는 수정 화면") // 필요 시 교체
+                                //                            } label: {
+                                //                                HStack(alignment: .center, spacing: 12) {
+                                //
+                                //                                    Image(systemName: "photo")
+                                //                                        .resizable()
+                                //                                        .aspectRatio(contentMode: .fit)
+                                //                                        .padding(12)
+                                //                                        .frame(width: 60, height: 60)
+                                //                                        .foregroundColor(.gray)
+                                //                                        .background(Color(.systemGray6))
+                                //                                        .cornerRadius(5)
+                                //
+                                //                                    VStack(alignment: .leading, spacing: 4) {
+                                //                                        Text("안녕하세요~~~!!")
+                                //                                            .font(.headline)
+                                //
+                                //                                        Spacer()
+                                //
+                                //                                        HStack(alignment: .center) {
+                                //                                            Image(systemName: "hand.thumbsup")
+                                //                                                .resizable()
+                                //                                                .aspectRatio(contentMode: .fill)
+                                //                                                .foregroundColor(.gray)
+                                //                                                .frame(width: 18, height: 18)
+                                //
+                                //                                            Text("123")
+                                //                                                .font(.caption)
+                                //                                                .foregroundColor(.gray)
+                                //
+                                //                                            Text("운동")
+                                //                                                .font(.subheadline)
+                                //                                                .foregroundColor(.gray)
+                                //
+                                //                                            Spacer()
+                                //
+                                //                                            Text("@Rundo")
+                                //                                                .font(.caption)
+                                //                                                .foregroundColor(.secondary)
+                                //
+                                //                                        }
+                                //                                        .padding(.trailing, 12)
+                                //                                    }
+                                //                                    .frame(height: 21)
+                                //                                }
+                                //                                .frame(maxWidth: .infinity)
+                                //                                .frame(height: 40)
+                                //                                .padding(.vertical, 12)
+                                //                            }
+                                //
+                                //                            NavigationLink {
+                                //                                Text("카드 상세 또는 수정 화면") // 필요 시 교체
+                                //                            } label: {
+                                //                                HStack(alignment: .center, spacing: 12) {
+                                //
+                                //                                    Image(systemName: "photo")
+                                //                                        .resizable()
+                                //                                        .aspectRatio(contentMode: .fit)
+                                //                                        .padding(12)
+                                //                                        .frame(width: 60, height: 60)
+                                //                                        .foregroundColor(.gray)
+                                //                                        .background(Color(.systemGray6))
+                                //                                        .cornerRadius(5)
+                                //
+                                //                                    VStack(alignment: .leading, spacing: 4) {
+                                //                                        Text("안녕하세요~~~!!")
+                                //                                            .font(.headline)
+                                //
+                                //                                        Spacer()
+                                //
+                                //                                        HStack(alignment: .center) {
+                                //                                            Image(systemName: "hand.thumbsup")
+                                //                                                .resizable()
+                                //                                                .aspectRatio(contentMode: .fill)
+                                //                                                .foregroundColor(.gray)
+                                //                                                .frame(width: 18, height: 18)
+                                //                                            Text("123")
+                                //                                                .font(.caption)
+                                //                                                .foregroundColor(.gray)
+                                //                                            Text("운동")
+                                //                                                .font(.subheadline)
+                                //                                                .foregroundColor(.gray)
+                                //
+                                //                                            Spacer()
+                                //                                            Text("@Rundo")
+                                //                                                .font(.caption)
+                                //                                                .foregroundColor(.secondary)
+                                //
+                                //                                        }
+                                //                                        .padding(.trailing, 12)
+                                //                                    }
+                                //                                    .frame(height: 21)
+                                //                                }
+                                //                                .frame(maxWidth: .infinity)
+                                //                                .frame(height: 40)
+                                //                                .padding(.vertical, 12)
+                                //                            }
+                                ForEach(userCards, id: \.id) { card in
+                                    NavigationLink {
+                                        EditCardSheet(cardId: card.id)
+                                    } label: {
+                                        HStack(alignment: .center, spacing: 12) {
+                                            if let imageData = card.image, let uiImage = UIImage(data: imageData) {
+                                                Image(uiImage: uiImage)
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fill)
+                                                    .frame(width: 60, height: 60)
+                                                    .cornerRadius(5)
+                                            } else {
+                                                Image(systemName: "photo")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .padding(12)
+                                                    .frame(width: 60, height: 60)
                                                     .foregroundColor(.gray)
-                                                    .frame(width: 18, height: 18)
-                                                
-                                                Text("123")
-                                                    .font(.caption)
-                                                    .foregroundColor(.gray)
-                                                
-                                                Text(card.title)
-                                                    .font(.subheadline)
-                                                    .foregroundColor(.gray)
-                                                
+                                                    .background(Color(.systemGray6))
+                                                    .cornerRadius(5)
+                                            }
+                                            
+                                            VStack(alignment: .leading, spacing: 4) {
+                                                Text(card.question)
+                                                    .font(.headline)
                                                 Spacer()
-                                                
-                                                if let data = card.author?.imageData,
-                                                   let uiImage = UIImage(data: data) {
-                                                    Image(uiImage: uiImage)
+                                                HStack(alignment: .center){
+                                                    Image(systemName: "hand.thumbsup")
                                                         .resizable()
                                                         .aspectRatio(contentMode: .fill)
+                                                        .foregroundColor(.gray)
                                                         .frame(width: 18, height: 18)
-                                                        .clipShape(Circle())
-                                                } else {
-                                                    Image(systemName: "person.crop.circle.fill")
-                                                        .resizable()
-                                                        .frame(width: 18, height: 18)
-                                                        .foregroundColor(Color(.systemGray4))
-                                                }
-                                                
-                                                if let authorName = card.author?.name {
-                                                    Text("@\(authorName)")
+                                                    
+                                                    Text("123")
                                                         .font(.caption)
-                                                        .foregroundColor(.secondary)
+                                                        .foregroundColor(.gray)
+                                                    
+                                                    Text(card.title)
+                                                        .font(.subheadline)
+                                                        .foregroundColor(.gray)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    if let data = card.author?.imageData,
+                                                       let uiImage = UIImage(data: data) {
+                                                        Image(uiImage: uiImage)
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fill)
+                                                            .frame(width: 18, height: 18)
+                                                            .clipShape(Circle())
+                                                    } else {
+                                                        Image(systemName: "person.crop.circle.fill")
+                                                            .resizable()
+                                                            .frame(width: 18, height: 18)
+                                                            .foregroundColor(Color(.systemGray4))
+                                                    }
+                                                    
+                                                    if let authorName = card.author?.name {
+                                                        Text("@\(authorName)")
+                                                            .font(.caption)
+                                                            .foregroundColor(.secondary)
+                                                    }
                                                 }
+                                                .padding(.trailing, 12)
                                             }
-                                            .padding(.trailing, 12)
+                                            .frame(height: 21)
                                         }
-                                        .frame(height: 21)
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height: 40)
+                                        .padding(.vertical, 12)
                                     }
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 40)
-                                    .padding(.vertical, 12)
+                                }
+                                .onDelete { offsets in
+                                    viewModel?.deleteCard(at: offsets, from: userCards)
                                 }
                             }
-                            .onDelete { offsets in
-                                viewModel?.deleteCard(at: offsets, from: userCards)
-                            }
+                            .listStyle(.inset)
                         }
-                        .listStyle(.inset)
                     }
                 }
 //                Spacer()

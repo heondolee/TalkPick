@@ -8,24 +8,36 @@
 import SwiftUI
 
 struct CardView: View {
-    let topicTitle: String
+    let topicTitle: String?
+    let card: Card?
     @Environment(\.modelContext) private var context
     @EnvironmentObject var authViewModel: AuthViewModel // 카드 좋아요 누를때
     @State private var viewModel: CardViewModel?
-    
+
     init(topicTitle: String) {
         self.topicTitle = topicTitle
+        self.card = nil
+    }
+
+    init(card: Card) {
+        self.card = card
+        self.topicTitle = nil
     }
 
     @State private var currentIndex = 0
 
     var filteredCards: [Card] {
-        viewModel?.getCardsByTitle(topicTitle) ?? []
+        if let card = card {
+            return [card]
+        } else if let topicTitle = topicTitle {
+            return viewModel?.getCardsByTitle(topicTitle) ?? []
+        }
+        return []
     }
 
     var body: some View {
         VStack(alignment: .center, spacing: 36) {
-            Text(topicTitle)
+            Text(topicTitle ?? card?.title ?? "")
                 .font(.largeTitle)
                 .bold()
             if !filteredCards.isEmpty {
