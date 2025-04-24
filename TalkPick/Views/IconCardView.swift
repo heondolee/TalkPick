@@ -25,7 +25,7 @@ struct IconCardView: View {
 
             // 반투명 하단 레이어
             Rectangle()
-                .fill(Color.black.opacity(0.1))
+                .fill(Color.black.opacity(0.15))
                 .frame(height: 40)
                 .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
 
@@ -41,9 +41,10 @@ struct IconCardView: View {
                 Text(icon)
                     .font(Font.custom("SF Pro", size: 56).weight(.heavy))
                     .foregroundColor(.white)
-                    .offset(y: -10)
+                    .offset(y: -15)
             }
-            .padding(14)
+            .padding(.horizontal, 14)
+            .padding(.bottom, 10)
         }
         .frame(height: 100)
         .cornerRadius(12)
