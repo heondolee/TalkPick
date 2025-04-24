@@ -48,20 +48,20 @@ struct CardView: View {
                         let card = filteredCards[index]
                         
                         //여기서 부터가 카드 UI
-                        VStack(alignment: .center, spacing: 32) {
+                        VStack(alignment: .center, spacing: 24) {
                             Spacer()
                         if let imageData = card.image, let uiImage = UIImage(data: imageData) {
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 80, height: 80)
+                                .frame(width: 188, height: 188)
                                 .cornerRadius(16)
                         } else {
                             Image(systemName: "photo")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .padding(12)
-                                .frame(width: 80, height: 80)
+                                .frame(width: 188, height: 188)
                                 .foregroundColor(.gray)
                                 .background(Color.white)
                                 .cornerRadius(16)
@@ -78,7 +78,7 @@ struct CardView: View {
                             }
                             .padding(.horizontal, 24)
                             .padding(.vertical, 15)
-                            .frame(maxWidth: .infinity, minHeight: 281, maxHeight: 281, alignment: .leading)
+                            .frame(maxWidth: .infinity, minHeight: 174, maxHeight: 174, alignment: .leading)
                             .background(.white.opacity(0.77))
                             .cornerRadius(10)
                             
