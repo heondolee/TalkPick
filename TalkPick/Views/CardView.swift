@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CardView: View {
     let topicTitle: String?
     let card: Card?
+    @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.modelContext) private var context
-    @EnvironmentObject var authViewModel: AuthViewModel // 카드 좋아요 누를때
     @State private var viewModel: CardViewModel?
+    @State private var viewModel2: User?
 
     init(topicTitle: String) {
         self.topicTitle = topicTitle
@@ -139,7 +141,10 @@ struct CardView: View {
                 
                 HStack(alignment: .center, spacing: 64) {
                     Button {
-                        
+                        if let user = viewModel2 {
+                            let card = filteredCards[currentIndex]
+                            viewModel?.likeCard(card, by: user)
+                        }
                     } label: {
                         VStack(alignment: .center, spacing: 10) {
                             Image(systemName: "hand.thumbsup")
@@ -198,6 +203,26 @@ struct CardView: View {
         .onAppear {
             if viewModel == nil {
                 viewModel = CardViewModel(context: context)
+            }
+        }
+        .task {
+            do {
+                guard let userID = authViewModel.userID else {
+                    print("Invalid user ID")
+                    return
+                }
+
+                let descriptor = FetchDescriptor<User>(
+                    predicate: #Predicate { $0.id == userID }
+                )
+
+                viewModel2 = try context.fetch(descriptor).first
+                
+                let name = viewModel2?.name
+                print("name: \(name ?? "nil")")
+            } catch {
+                print("유저 fetch 실패: \(error)")
+                viewModel2 = nil
             }
         }
     }

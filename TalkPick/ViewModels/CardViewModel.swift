@@ -39,9 +39,16 @@ class CardViewModel: ObservableObject { // 프로토콜: 클래스가 뷰에 상
     func getCardsByTitle(_ title: String) -> [Card] {
         return cards.filter { $0.title == title }
     }
-    
 
-    // 좋아요를 누르면 카드
+    // 좋아요
+    
+    func likeCard(_ card: Card, by user: User) {
+        // 중복 좋아요 방지
+        if !user.likedCards.contains(where: { $0.id == card.id }) {
+            user.likedCards.append(card)
+            try? context.save()
+        }
+    }
     
     private func insertMockData() {
         let user = User(id: "1234", name: "임시작성자", imageData: nil)
