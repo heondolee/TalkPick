@@ -32,7 +32,7 @@ struct CardView: View {
         if let card = card {
             return [card]
         } else if let topicTitle = topicTitle {
-            return viewModel?.getCardsByTitle(topicTitle) ?? []
+            return viewModel?.getCardsByTitle(topicTitle).sorted(by: { $0.updatedAt > $1.updatedAt }) ?? []
         }
         return []
     }
@@ -183,8 +183,8 @@ struct CardView: View {
                                 .multilineTextAlignment(.center)
                                 .foregroundColor((viewModel2?.dislikedCards.contains(where: { $0.id == filteredCards[currentIndex].id }) ?? false) ? .blue : .gray)
                                 .frame(width: 104, height: 48, alignment: .center)
-
-                            Text("별로예요\n1K")
+                            
+                            Text("별로예요 \n \(filteredCards[currentIndex].dislikes)")
                                 .font(
                                     .callout
                                         .weight(.bold)

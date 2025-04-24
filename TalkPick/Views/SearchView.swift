@@ -49,7 +49,7 @@ struct SearchView: View {
                     }
                 }
             }
-            .navigationTitle("Talk Pick")
+            .navigationTitle("둘러보기")
         }
     }
 }

@@ -10,7 +10,8 @@ import AuthenticationServices
 
 struct LoginView: View {
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
+            
             AppleSigninButton()
         }
         .frame(height:UIScreen.main.bounds.height)
@@ -22,9 +23,13 @@ struct LoginView: View {
 struct AppleSigninButton : View{
     var body: some View{
         
-        VStack(spacing: 30) {
-            Text("로그인")
-                .font(.largeTitle)
+        VStack(spacing: 50) {
+            
+            Text("Talk Pick")
+                .font(.system(size: 48, weight: .bold))
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
+            
             SignInWithAppleButtonView()
         }
     }

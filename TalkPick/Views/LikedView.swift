@@ -68,7 +68,7 @@ struct LikedView: View {
                                                 .foregroundColor(.gray)
                                                 .frame(width: 18, height: 18)
                                             
-                                            Text("123")
+                                            Text("\(card.likes)")
                                                 .font(.caption)
                                                 .foregroundColor(.gray)
                                             
