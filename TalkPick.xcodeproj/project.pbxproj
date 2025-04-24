@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C613BF602DB8CE58002239BA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C613BF5F2DB8CE58002239BA /* FirebaseAnalytics */; };
 		C613BF622DB8CE58002239BA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C613BF612DB8CE58002239BA /* FirebaseAuth */; };
+		C6246CEE2DBA1627009B7963 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C6246CED2DBA1627009B7963 /* FirebaseFirestore */; };
 		C692B1522DB7C0D200346F67 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C692B1512DB7C0D200346F67 /* FirebaseAnalytics */; };
 		C692B1542DB7C0D200346F67 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C692B1532DB7C0D200346F67 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 			files = (
 				C692B1522DB7C0D200346F67 /* FirebaseAnalytics in Frameworks */,
 				C692B1542DB7C0D200346F67 /* FirebaseAuth in Frameworks */,
+				C6246CEE2DBA1627009B7963 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +75,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C6246CEF2DBA164A009B7963 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C6A6806E2DABDC85000D31E0 = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +89,7 @@
 				C6836ECB2DAFCEAB0040680A /* TalkPick.app */,
 				C6836ECC2DAFCEAB0040680A /* TalkPickTests.xctest */,
 				C6836ECD2DAFCEAB0040680A /* TalkPickUITests.xctest */,
+				C6246CEF2DBA164A009B7963 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +115,7 @@
 			packageProductDependencies = (
 				C692B1512DB7C0D200346F67 /* FirebaseAnalytics */,
 				C692B1532DB7C0D200346F67 /* FirebaseAuth */,
+				C6246CED2DBA1627009B7963 /* FirebaseFirestore */,
 			);
 			productName = TalkPick;
 			productReference = C6836ECB2DAFCEAB0040680A /* TalkPick.app */;
@@ -576,6 +587,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C692B1502DB7C0D200346F67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		C6246CED2DBA1627009B7963 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C692B1502DB7C0D200346F67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 		C692B1512DB7C0D200346F67 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

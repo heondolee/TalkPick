@@ -11,9 +11,13 @@ import FirebaseCore
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
+    func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
+      print("🔥 AppDelegate: didFinishLaunchingWithOptions 실행됨")
+      FirebaseApp.configure()
+      
+      // ✅ 딱 한 번 실행 (초기 데이터 업로드)
+      FirestoreUploader.uploadSection()
 
     return true
   }
