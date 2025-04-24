@@ -25,7 +25,7 @@ struct IconCardView: View {
 
             // 반투명 하단 레이어
             Rectangle()
-                .fill(Color.black.opacity(0.4))
+                .fill(Color.black.opacity(0.1))
                 .frame(height: 40)
                 .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
 
@@ -41,7 +41,7 @@ struct IconCardView: View {
                 Text(icon)
                     .font(Font.custom("SF Pro", size: 56).weight(.heavy))
                     .foregroundColor(.white)
-                    .offset(y: -8)
+                    .offset(y: -10)
             }
             .padding(14)
         }
@@ -50,8 +50,6 @@ struct IconCardView: View {
         .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 2)
     }
 }
-
-import SwiftUI
 
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
