@@ -45,12 +45,14 @@ class CardViewModel: ObservableObject { // 프로토콜: 클래스가 뷰에 상
     func likeCard(_ card: Card, by user: User) {
         if let index = user.likedCards.firstIndex(where: { $0.id == card.id }) {
             user.likedCards.remove(at: index) // Unlike
+            card.likes -= 1
         } else {
-            card.updatedAt = Date() // Update timestamp to now
-            user.likedCards.append(card) // Like
-            // Remove from dislikes if it exists
+            card.updatedAt = Date()
+            user.likedCards.append(card)
+            card.likes += 1
             if let dislikeIndex = user.dislikedCards.firstIndex(where: { $0.id == card.id }) {
                 user.dislikedCards.remove(at: dislikeIndex)
+                card.dislikes -= 1
             }
         }
         try? context.save()
@@ -59,11 +61,13 @@ class CardViewModel: ObservableObject { // 프로토콜: 클래스가 뷰에 상
     func dislikeCard(_ card: Card, by user: User) {
         if let index = user.dislikedCards.firstIndex(where: { $0.id == card.id }) {
             user.dislikedCards.remove(at: index) // Remove dislike
+            card.dislikes -= 1
         } else {
-            user.dislikedCards.append(card) // Dislike
-            // Remove from likes if it exists
+            user.dislikedCards.append(card)
+            card.dislikes += 1
             if let likeIndex = user.likedCards.firstIndex(where: { $0.id == card.id }) {
                 user.likedCards.remove(at: likeIndex)
+                card.likes -= 1
             }
         }
         try? context.save()
