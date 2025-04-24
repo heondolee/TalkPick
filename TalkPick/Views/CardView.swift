@@ -32,7 +32,7 @@ struct CardView: View {
         if let card = card {
             return [card]
         } else if let topicTitle = topicTitle {
-            return viewModel?.getCardsByTitle(topicTitle).sorted(by: { $0.updatedAt > $1.updatedAt }) ?? []
+            return viewModel?.getCardsByTitle(topicTitle) ?? []
         }
         return []
     }
