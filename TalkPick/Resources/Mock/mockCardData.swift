@@ -42,9 +42,9 @@ let mockCardData: [CardSample] = [
     CardSample(id: 17, question: "처음 만난 사람에게 먼저 하는 질문은?", title: "어색할 때", likes: "0", dislikes: "0", image: Data(), updatedAt: Date()),
     CardSample(id: 18, question: "처음 본 사람과 금방 친해지는 꿀팁은?", title: "어색할 때", likes: "0", dislikes: "0", image: Data(), updatedAt: Date()),
 
-    CardSample(id: 19, question: "가장 재밌었던 단체 게임은?", title: "레크레이션", likes: "0", dislikes: "0", image: Data(), updatedAt: Date()),
-    CardSample(id: 20, question: "분위기를 띄우는 본인만의 방법은?", title: "레크레이션", likes: "0", dislikes: "0", image: Data(), updatedAt: Date()),
-    CardSample(id: 21, question: "모임에서 가장 좋아하는 활동은?", title: "레크레이션", likes: "0", dislikes: "0", image: Data(), updatedAt: Date()),
+    CardSample(id: 19, question: "가장 재밌었던 단체 게임은?", title: "이벤트", likes: "0", dislikes: "0", image: Data(), updatedAt: Date()),
+    CardSample(id: 20, question: "분위기를 띄우는 본인만의 방법은?", title: "이벤트", likes: "0", dislikes: "0", image: Data(), updatedAt: Date()),
+    CardSample(id: 21, question: "모임에서 가장 좋아하는 활동은?", title: "이벤트", likes: "0", dislikes: "0", image: Data(), updatedAt: Date()),
 
     CardSample(id: 22, question: "가장 최근에 울었던 이유는?", title: "딥토크", likes: "0", dislikes: "0", image: Data(), updatedAt: Date()),
     CardSample(id: 23, question: "지금 가장 두려운 것은?", title: "딥토크", likes: "0", dislikes: "0", image: Data(), updatedAt: Date()),
