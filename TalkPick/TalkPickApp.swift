@@ -9,24 +9,14 @@ import SwiftUI
 import SwiftData
 import FirebaseCore
 
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-      print("🔥 AppDelegate: didFinishLaunchingWithOptions 실행됨")
-      FirebaseApp.configure()
-      
-      // ✅ 딱 한 번 실행 (초기 데이터 업로드)
-      FirestoreUploader.uploadSection()
-
-    return true
-  }
-}
-
 @main
 struct TalkPickApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var authViewModel = AuthViewModel() // 🔥 전역 상태 공유
+    
+    init() {
+        FirebaseApp.configure()
+        FirestoreUploader.uploadSection() // 한번만 실행
+    }
 
     var body: some Scene {
         WindowGroup {
