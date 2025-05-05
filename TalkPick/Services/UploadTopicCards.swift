@@ -63,12 +63,22 @@ class FirestoreUploader {
             ]
         ]
 
-        db.collection("sections").document("popular_topics").setData(sectionData) { error in
-            print("데이터 업로드중...")
-            if let error = error {
-                print("❌ Firestore 업로드 실패: \(error.localizedDescription)")
-            } else {
-                print("✅ Firestore에 업로드 성공!")
+//        print("0000")
+//        Task {
+//            print("1111")
+//            try await db.collection("sections").document("popular_topics").setData(sectionData)
+//            print("result")
+//        }
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+            db.collection("sections").document("popular_topics").setData(sectionData) { error in
+                print("데이터 업로드중...")
+                if let error = error {
+                    print("❌ Firestore 업로드 실패: \(error.localizedDescription)")
+                } else {
+                    print("✅ Firestore에 업로드 성공!")
+                }
             }
         }
     }

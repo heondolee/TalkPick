@@ -15,6 +15,7 @@ struct TalkPickApp: App {
     
     init() {
         FirebaseApp.configure()
+        
         FirestoreUploader.uploadSection() // 한번만 실행
     }
 
